@@ -1,3 +1,5 @@
+![Screenshot CRUD Básico](screenshot-cargos.jpeg)
+
 # Projeto BASE
 
 Atualizar o projeto inteiro, sempre mantenha ele atualizado, não seja um goiaba que deixa as coisas em 1998.
