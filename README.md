@@ -14,6 +14,8 @@ npm audit fix; npm audit fix --force;
 rodar a API e o APP paralelamente :-D `npm run dev`
 
 ```shell
+npx nx run-many --target=serve --projects=simples-app,simples-api --parallel=true
+
 npx nx run-many --target=serve --projects=front,api --parallel=true
 npx nx run-many --target=serve --configuration=development --projects=front,api --parallel=true --maxParallel=100
 npx nx run-many --target=serve --configuration=qa --projects=front,api --parallel=true --maxParallel=100
