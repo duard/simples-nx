@@ -1,0 +1,81 @@
+<div class="wrapper" fxLayout="column" *ngIf="data$ | async as data">
+  <div class="header">
+    <app-toolbar-crud-simples
+      [title]="titulo"
+      [localParams]="localParams"
+      [showAddButton]="true"
+      [showMenuButton]="false"
+      (add)="onAdd()"
+      (filterAPI)="onFilterApi($event)"
+      (refresh)="onRefresh($event)"
+    ></app-toolbar-crud-simples>
+  </div>
+
+  <div class="content main-container" #scrollContainer>
+    <table
+      mat-table
+      #table
+      [dataSource]="data"
+      matSort
+      (matSortChange)="onSortAPI($event)"
+      matSortActive="id"
+      matSortDirection="desc"
+      class="mat-elevation-z3"
+    >
+      <ng-container matColumnDef="id">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          arrowPosition="before"
+          class="adireita"
+          layout-align="start center"
+        >
+          #Id.
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let rec"
+          class="adireita"
+          layout-align="start center"
+        >
+          {{ rec?.id }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="description">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          layout-align="start center"
+        >
+          Descrição
+        </th>
+        <td mat-cell *matCellDef="let rec" layout-align="start center">
+          {{ rec?.description }}
+        </td>
+      </ng-container>
+
+      <tbody>
+        <tr
+          mat-header-row
+          *matHeaderRowDef="displayedColumns; sticky: true"
+          class="mat-elevation-z2"
+        ></tr>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: displayedColumns"
+          (dblclick)="onDblClick(row)"
+        ></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer">
+    <app-toolbar-crud-footer
+      [total]="selectors$.total$ | async"
+      (paginate)="onPaginateAPI()"
+    ></app-toolbar-crud-footer>
+  </div>
+</div>

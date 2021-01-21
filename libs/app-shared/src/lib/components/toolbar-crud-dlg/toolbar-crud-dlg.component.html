@@ -1,0 +1,45 @@
+<mat-toolbar color="primary" class="crud-toolbar mat-elevation-z2">
+
+  <!-- <button mat-icon-button (click)="onCancel($event)" matTooltip="Voltar : Fechar Diálogo">
+    <mat-icon>arrow_back</mat-icon>
+  </button> -->
+
+  <button mat-icon-button [matMenuTriggerFor]="matMenuIndex" *ngIf="showLeftMenu">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <span matTooltip="{{title}}">{{title}} </span>
+  <!-- <span *ngIf="isDev"> &nbsp; {{form?.valid}} </span> -->
+  <span class="menu-spacer"></span>
+
+  <button mat-raised-button *ngIf="(form?.valid && form?.dirty) || (saveButton)" mat-raised-button class="esqSpace"
+    [hidden]="(!form?.valid && !form?.dirty) || !isValid" (click)="onSave($event)" (keyup.ctrl.enter)="onSave($event)"
+    matTooltip="CONFIRMAR : Gravar dados">
+    Salvar
+    <mat-icon>save</mat-icon>
+
+  </button>
+
+  <button mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+
+  <button mat-icon-button (click)="onCancel($event)" matTooltip="CANCELAR : Fechar Diálogo">
+    <mat-icon>close</mat-icon>
+  </button>
+
+</mat-toolbar>
+
+
+<mat-menu #menu="matMenu">
+  <button *ngIf="deleteButton && operation==='edit'" mat-menu-item (click)="onDelete($event)"
+    matTooltip="ATENÇÃO : Excluir Registro">
+    <mat-icon>delete</mat-icon>
+    <span>Excluir Registro</span>
+  </button>
+  <mat-divider *ngIf="deleteButton"></mat-divider>
+  <button mat-menu-item (click)="onCancel($event)" matTooltip="CANCELAR : Fechar Diálogo">
+    <mat-icon>close</mat-icon>
+    <span>Sair/Voltar</span>
+  </button>
+</mat-menu>

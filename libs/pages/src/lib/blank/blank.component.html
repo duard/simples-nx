@@ -1,0 +1,176 @@
+<!-- Remove the code below to get empty Taiga UI starter -->
+<header class="header">
+  <img
+    src="https://raw.githubusercontent.com/TinkoffCreditSystems/taiga-ui/1c73e97155678e2616726866484db8ccad4cdb4f/projects/demo/src/assets/images/taiga.svg"
+    alt="taiga ui logo"
+    width="96"
+  />
+
+  <a tuiLink class="taiga-link" target="_blank" href="https://taiga-ui.dev">taiga-ui.dev</a>
+
+  <iframe
+    class="tui-space_bottom-4"
+    src="https://ghbtns.com/github-btn.html?user=TinkoffCreditSystems&repo=taiga-ui&type=star&count=true&size=large"
+    frameborder="0"
+    scrolling="0"
+    width="135"
+    height="30"
+    title="GitHub"
+  ></iframe>
+
+  <p class="tui-text_body-xl">
+    <strong>Taiga UI</strong> is fully-treeshakable Angular UI Kit consisting of multiple base libraries and several
+    add-ons
+  </p>
+</header>
+
+<h1>Why Taiga UI</h1>
+
+<tui-island class="tui-space_top-6" [hoverable]="true">
+  <h3 class="tui-island__title">🧩 Modular and fully-treeshakable</h3>
+  <p class="tui-island__paragraph">
+    We harnessed the power of Secondary Entry Points mechanism. You can import even just one entity from our library and
+    be sure that there is no redundant code in your bundle
+  </p>
+</tui-island>
+
+<tui-island class="tui-space_top-6" [hoverable]="true">
+  <h3 class="tui-island__title">🧙 Agnostic</h3>
+  <p class="tui-island__paragraph">
+    Our components are very flexible and are ready for any usecase. But we take care of basic UX aspects to let you
+    focus on your project features
+  </p>
+</tui-island>
+
+<tui-island class="tui-space_top-6" [hoverable]="true">
+  <h3 class="tui-island__title">🦋 Customizable</h3>
+  <p class="tui-island__paragraph">
+    We use CSS custom properties for all our styling and provide easy methods to customize all UI components
+  </p>
+</tui-island>
+
+<tui-island class="tui-space_top-6" [hoverable]="true">
+  <h3 class="tui-island__title">🛠 Well engineered</h3>
+  <p class="tui-island__paragraph">
+    We are not afraid of DI, all our components use OnPush and the whole project is developed with
+    <code>strict</code> TypeScript mode
+  </p>
+</tui-island>
+
+<tui-island class="tui-space_top-6 tui-space_bottom-6" [hoverable]="true">
+  <h3 class="tui-island__title">📦 It's big!</h3>
+  <p class="tui-island__paragraph">
+    We have 130+ components, 100+ directives, dozens of tokens, utils and tools. And it isn't over yet 🚀
+  </p>
+</tui-island>
+
+<h1>Some of our components</h1>
+
+<tui-multi-select
+  [formControl]="control"
+  [tuiTextfieldLabelOutside]="true"
+  [(search)]="search"
+  tuiHintContent="Customizable for any use case"
+>
+  Multiselect
+  <tui-data-list-wrapper *tuiDataList tuiMultiSelectGroup [items]="filter(search)"></tui-data-list-wrapper>
+</tui-multi-select>
+
+<section tuiGroup class="buttons tui-space_top-6">
+  <button tuiButton appearance="secondary" size="m" (click)="showDialog()">Show dialog</button>
+
+  <button tuiButton size="m" appearance="flat" (click)="showNotification()">Show notification</button>
+</section>
+
+<tui-input-date-time class="tui-space_top-6"> Choose date and time </tui-input-date-time>
+
+<!-- <tui-tabs class="tui-space_top-6 tui-space_bottom-2" [(activeItemIndex)]="activeTab">
+	<button tuiTab>Line Chart</button>
+	<button tuiTab>Bar Chart</button>
+	<button tuiTab>Ring Chart</button>
+</tui-tabs>
+
+<ng-container [ngSwitch]="activeTab">
+	<ng-template [ngSwitchCase]="0">
+		<tui-axes class="axes" [verticalLines]="4" [horizontalLines]="2" [tuiLineChartHint]="hint">
+			<tui-line-chart *ngFor="let value of values" class="chart" [x]="0" [y]="0" [width]="400" [height]="200"
+				[value]="value"></tui-line-chart>
+		</tui-axes>
+	</ng-template>
+	<ng-template [ngSwitchCase]="1">
+		<tui-axes class="axes" [axisXLabels]="labelsX" [axisYLabels]="labelsY">
+			<tui-bar-chart [max]="10000" [value]="value"></tui-bar-chart>
+		</tui-axes>
+	</ng-template>
+	<ng-template [ngSwitchCase]="2">
+		<tui-ring-chart [value]="ringValue" [content]="content"></tui-ring-chart>
+
+		<ng-template #content="polymorpheus" polymorpheus let-index>
+			<tui-money [singleColor]="true" currency="USD" [value]="getValue(index)"></tui-money>
+			<div>{{getLabel(index)}}</div>
+		</ng-template>
+	</ng-template>
+</ng-container> -->
+
+<h1 class="tui-space_top-6">Quick links</h1>
+
+<section class="links">
+  <a tuiLink target="_blank" href="https://taiga-ui.dev">Website</a> •
+  <a tuiLink target="_blank" href="https://taiga-ui.dev/getting-started">Documentation</a>
+  •
+  <a tuiLink target="_blank" href="https://github.com/TinkoffCreditSystems/taiga-ui/wiki">CDK Wiki</a>
+  •
+  <a tuiLink target="_blank" href="https://github.com/TinkoffCreditSystems/taiga-ui#core-team">Core team</a>
+</section>
+
+<ng-template #icon>
+  <tui-avatar size="xs" [rounded]="true" [avatarUrl]="avatarUrl"></tui-avatar>
+</ng-template>
+<h3>button[tuiButton]</h3>
+<p>
+  <button tuiButton type="button" class="tui-space_right-2" icon="tuiIconSearch" (click)="onClick($event)">
+    Button
+  </button>
+
+  <button
+    tuiButton
+    type="button"
+    class="tui-space_right-2"
+    iconRight="tuiIconSearch"
+    [disabled]="true"
+    (click)="onClick($event)"
+  >
+    Disabled button
+  </button>
+
+  <button tuiButton type="button" [showLoader]="true" (click)="onClick($event)">Loading button</button>
+</p>
+<h3>button[tuiIconButton]</h3>
+<p>
+  <button tuiIconButton type="button" class="tui-space_right-2" icon="tuiIconSearch" (click)="onClick($event)"></button>
+
+  <button
+    tuiIconButton
+    type="button"
+    class="tui-space_right-2"
+    icon="tuiIconSearch"
+    [disabled]="true"
+    (click)="onClick($event)"
+  ></button>
+
+  <button tuiIconButton type="button" [showLoader]="true" (click)="onClick($event)"></button>
+</p>
+<h3>a[tuiButton]</h3>
+<p>
+  <a tuiButton type="button" class="tui-space_right-2" href="http://google.com" [icon]="icon"> Link </a>
+
+  <a tuiButton [showLoader]="true"> Loading button </a>
+</p>
+<h3>a[tuiIconButton]</h3>
+<p>
+  <a tuiIconButton type="button" class="tui-space_right-2" [icon]="icon" [routerLink]="['/tui-dropdown']"></a>
+
+  <a tuiIconButton type="button" class="tui-space_right-2" icon="tuiIconSearch" [disabled]="true" [routerLink]=""></a>
+
+  <a tuiIconButton type="button" [showLoader]="true" [routerLink]=""></a>
+</p>

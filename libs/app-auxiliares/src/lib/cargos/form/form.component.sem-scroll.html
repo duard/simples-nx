@@ -1,0 +1,78 @@
+<div class="wrapper">
+  <div class="header">
+    <mat-toolbar class="mat-elevation-z9" color="primary">
+      <button mat-icon-button (click)="onMenuClick()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <h1 class="example-app-name">{{titulo}}</h1>
+    </mat-toolbar>
+  </div>
+
+  <div class="content">
+    <perfect-scrollbar>
+      <form [formGroup]='formCRUD' (keyup.escape)="onCancel()" (keydown.control.delete)="onDelete()">
+
+        <div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="start center" fxLayoutGap="10px"
+          fxLayoutGap.xs="0">
+
+          <div class="item item-2" fxFlex="50%">
+            <mat-form-field class="full-width">
+              <input type="text" #inputId formControlName="id" matInput placeholder="id" cdkFocusRegionstart>
+            </mat-form-field>
+          </div>
+
+          <div class="item item-1" fxFlex="50%">
+            <mat-form-field class="full-width">
+              <input type="text" #inputDescription formControlName="description" matInput placeholder="Description"
+                cdkFocusRegionstart>
+            </mat-form-field>
+          </div>
+
+        </div>
+
+
+
+        <div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="start center" fxLayoutGap="10px"
+          fxLayoutGap.xs="0">
+
+          <div class="item item-4" fxFlex="20%">
+
+            <div fxLayout="row" fxLayoutAlign="start start">
+              <section class="example-section">
+                <div>
+                  <mat-slide-toggle formControlName="isActive" [checked]="1" (change)="onChange($event.checked)">
+                    {{isActive}}
+                  </mat-slide-toggle>
+                </div>
+              </section>
+            </div>
+
+          </div>
+        </div>
+
+      </form>
+
+      <p *ngFor="let item of fakeArray(4);">
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+        industry's
+        standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
+        make a
+        type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
+        remaining
+        essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem
+        Ipsum
+        passages, and more recently with desktop publishing software like Aldus PageMaker including versions of
+        Lorem Ipsum.
+      </p>
+
+    </perfect-scrollbar>
+  </div>
+  <div class="footer">
+    <mat-toolbar class="mat-elevation-z4" color="primary">
+      <span class="fill-space"></span>
+      <div class="toolbar-icon">
+        <mat-icon>account_circle</mat-icon>
+      </div>
+    </mat-toolbar>
+  </div>
+</div>

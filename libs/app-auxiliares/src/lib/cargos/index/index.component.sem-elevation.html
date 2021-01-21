@@ -1,0 +1,59 @@
+<app-toolbar-crud-simples class="mat-elevation-z2" [title]="titulo" [localParams]="localParams" (refresh)="onRefresh($event)"
+  [showAddButton]="true" (clickSearch)="onClickSearch()" (cancelSearch)="onCancelSearch()"
+  (filterLocal)="onFilter($event)" [matMenuMore]="menuMore" [matMenuFilter]="menuFilter"
+  [showMenuButton]="false" (add)="onAdd()" ></app-toolbar-crud-simples>
+
+<div class="mat-elevation-z" *ngIf="data$ | async as data; else loading" >
+
+  <table mat-table #table [dataSource]="data" matSort matSortActive="id" matSortDirection="desc"
+    class="mat-elevation-z2">
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="before" class="adireita"
+        layout-align="start center">
+        #Id. </th>
+      <td mat-cell *matCellDef="let rec" class="adireita" layout-align="start center"> {{rec?.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header layout-align="start center"> Cargo </th>
+      <td mat-cell *matCellDef="let rec" layout-align="start center">{{rec?.description}} </td>
+    </ng-container>
+
+    <tbody>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" class="mat-elevation-z2"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (dblclick)="onDblClick(row)"></tr>
+    </tbody>
+
+  </table>
+
+</div>
+
+
+<ng-template #loading>
+  <app-loader></app-loader>
+</ng-template>
+
+
+<div style="visibility: hidden; display: none">
+  <button mat-button [matMenuTriggerFor]="menuMore">
+    menuMore
+  </button>
+</div>
+
+<mat-menu #menuMore="matMenu">
+</mat-menu>
+
+
+<div style="visibility: hidden; display: none">
+  <button mat-button [matMenuTriggerFor]="menuFilter">
+    menuFilter
+  </button>
+</div>
+
+<!-- MENU DE FILTRO -->
+
+
+<mat-menu #menuFilter="matMenu">
+
+</mat-menu>

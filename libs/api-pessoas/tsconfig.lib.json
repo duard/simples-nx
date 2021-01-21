@@ -8,7 +8,6 @@
     // "target": "es6",
     "module": "commonjs", // <-- here
     "target": "es2017", // <-- here,
-    "showCircularDependencies": false
   },
   "exclude": ["**/*.spec.ts"],
   "include": ["**/*.ts"]

@@ -1,90 +1,70 @@
-# Simples
+# Projeto BASE
 
-This project was generated using [Nx](https://nx.dev).
+Atualizar o projeto inteiro, sempre mantenha ele atualizado, não seja um goiaba que deixa as coisas em 1998.
 
-<p align="center"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
+```shell
+npm uninstall -g angular-cli;
+npm install -g @angular/cli@latest;
+npx ng update --all --force;
+npm audit fix; npm audit fix --force;
+```
 
-🔎 **Nx is a set of Extensible Dev Tools for Monorepos.**
+rodar a API e o APP paralelamente :-D `npm run dev`
 
-## Adding capabilities to your workspace
+```shell
+npx nx run-many --target=serve --projects=front,api --parallel=true
+npx nx run-many --target=serve --configuration=development --projects=front,api --parallel=true --maxParallel=100
+npx nx run-many --target=serve --configuration=qa --projects=front,api --parallel=true --maxParallel=100
+npx nx run-many --target=serve --configuration=production --projects=front,api --parallel=true --maxParallel=100
+```
 
-Nx supports many plugins which add capabilities for developing different types of applications and different tools.
+Gerar todas as Entities do seu banco de dados
 
-These capabilities include generating applications, libraries, etc as well as the devtools to test, and build projects as well.
+```shell
+npx typeorm-model-generator -h localhost -d seubancodedados -u seuusuario -x suasenha -e mysql -o .
+```
 
-Below are our core plugins:
+Criar uma nova Library NestJS
 
-- [React](https://reactjs.org)
-  - `npm install --save-dev @nrwl/react`
-- Web (no framework frontends)
-  - `npm install --save-dev @nrwl/web`
-- [Angular](https://angular.io)
-  - `npm install --save-dev @nrwl/angular`
-- [Nest](https://nestjs.com)
-  - `npm install --save-dev @nrwl/nest`
-- [Express](https://expressjs.com)
-  - `npm install --save-dev @nrwl/express`
-- [Node](https://nodejs.org)
-  - `npm install --save-dev @nrwl/node`
+```shell
+nx generate @nrwl/nest:library lib-nome-a-ser-creiada
+```
 
-There are also many [community plugins](https://nx.dev/nx-community) you could add.
+##### installs angular
 
-## Generate an application
+```
+npm i @ngrx/store-devtools @ngrx/store @ngrx/effects @ngrx/store-devtools @ngrx/schematics  @angular/animations @angular/cdk @angular/cdk @angular/flex-layout @angular/material  @angular/material-moment-adapter @ngx-translate/core  @ngrx/router-store --save
+npm i --save-dev ngrx-store-freeze
+npm audit fix; npm audit fix --force;
 
-Run `nx g @nrwl/react:app my-app` to generate an application.
+```
 
-> You can use any of the plugins above to generate applications as well.
+#### installs nestjs
 
-When using Nx, you can create multiple applications and libraries in the same workspace.
+```
+npm i --save typeorm @nestjs/config @nestjs/typeorm @nestjs/common dotenv-flow mysql
+npm i --save-dev
 
-## Generate a library
+npm audit fix; npm audit fix --force;
 
-Run `nx g @nrwl/react:lib my-lib` to generate a library.
+```
 
-> You can also use any of the plugins above to generate libraries as well.
+## configure o cypress para rodar no WSL2 :-)
 
-Libraries are sharable across libraries and applications. They can be imported from `@simples/mylib`.
+https://nickymeuleman.netlify.app/blog/gui-on-wsl2-cypress
 
-## Development server
+```
+npm uninstall cypress --save-dev; npm install cypress --save-dev;
+```
 
-Run `nx serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
+## configurar o cache
 
-## Code scaffolding
+Connect the workspace to your Nx Cloud account at https://nx.app/orgs/workspace-setup?accessToken=ZjFjYzI4OWMtNzY1Ny00MjYyLWI3YmItMmRkMjhkZmNlZDdkfHJlYWQtd3JpdGU=. This will allow you to configure the cache and see detailed stats. You can do it later.
 
-Run `nx g @nrwl/react:component my-component --project=my-app` to generate a new component.
+#### coisas boas
 
-## Build
+Diversos links bacanas
 
-Run `nx build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+##### links nestjs
 
-## Running unit tests
-
-Run `nx test my-app` to execute the unit tests via [Jest](https://jestjs.io).
-
-Run `nx affected:test` to execute the unit tests affected by a change.
-
-## Running end-to-end tests
-
-Run `ng e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
-
-Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
-
-## Understand your workspace
-
-Run `nx dep-graph` to see a diagram of the dependencies of your projects.
-
-## Further help
-
-Visit the [Nx Documentation](https://nx.dev) to learn more.
-
-## ☁ Nx Cloud
-
-### Computation Memoization in the Cloud
-
-<p align="center"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-cloud-card.png"></p>
-
-Nx Cloud pairs with Nx in order to enable you to build and test code more rapidly, by up to 10 times. Even teams that are new to Nx can connect to Nx Cloud and start saving time instantly.
-
-Teams using Nx gain the advantage of building full-stack applications with their preferred framework alongside Nx’s advanced code generation and project dependency graph, plus a unified experience for both frontend and backend developers.
-
-Visit [Nx Cloud](https://nx.app/) to learn more.
+https://awesomeopensource.com/project/juliandavidmr/awesome-nestjs

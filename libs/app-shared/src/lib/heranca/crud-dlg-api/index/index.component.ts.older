@@ -1,0 +1,279 @@
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, HostListener, Inject, Injector, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { MatPaginator, MatSort, MatTable, MatTableDataSource } from '@angular/material';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+
+import { Observable } from 'rxjs/internal/Observable';
+import { Subscription } from 'rxjs/internal/Subscription';
+
+import { CrudDlgApiState } from '../crud-dialogo-api-state';
+
+@Component({
+  selector: 'lib-index',
+  templateUrl: './index.component.html',
+  styleUrls: ['./index.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class IndexDlgApiComponent implements OnInit {
+  protected cdRef: ChangeDetectorRef;
+  protected router: Router;
+  protected activeRoute: ActivatedRoute;
+  protected store$: Store<CrudDlgApiState>;
+  protected appStoreFacade: RolesFacade;
+
+  formFilter: FormGroup;
+
+  titulo = 'CRUD-TELA-SEM-TITULO';
+  operation = 'index';
+  isDev: boolean;
+  localParams = '';
+  params;
+  currentUser: any;
+
+  hasData = false;
+  isInitializating = true;
+
+  actionUpdate;
+
+  protected subscription: Subscription;
+
+  @Input() displayedColumns;
+
+  @Input() registros$: Observable<any[]>;
+
+  @Output() dblClick = new EventEmitter();
+  @Output() add = new EventEmitter();
+  @Output() save = new EventEmitter();
+  @Output() clickSearch = new EventEmitter();
+  @Output() refresh = new EventEmitter<object>();
+
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
+  @ViewChild(MatTable, { static: false }) table: MatTable<any>;
+  @ViewChild(ToolbarCrudSimplesComponent, { static: false }) tbCrud: any;
+  @ViewChild(ToolbarInteracoesComponent, { static: false }) tbInteracao: ToolbarInteracoesComponent;
+
+  dataSource = new MatTableDataSource(null);
+
+  constructor(private injectorObj: Injector, @Inject('env') public env) {
+    try {
+      this.isDev = !this.env.production;
+      this.currentUser = JSON.parse(localStorage.getItem('sigusuario'));
+      this.router = this.injectorObj.get(Router);
+      this.activeRoute = this.injectorObj.get(ActivatedRoute);
+      // injector is undefined at this point
+      // tslint:disable-next-line: deprecation
+
+      this.cdRef = this.injectorObj.get(ChangeDetectorRef);
+      this.store$ = <Store<CrudDlgApiState>>this.injectorObj.get(Store);
+      this.appStoreFacade = this.injectorObj.get(RolesFacade);
+
+      this.setShortcuts();
+    } catch (e) {
+    }
+  }
+
+  ngOnInit() {
+  }
+
+  onRefresh(params?) {
+    if (params) {
+      this.params = params;
+    }
+    this.hasData = false;
+    this.refresh.emit(this.params);
+  }
+
+  onDblClick(rec) {
+    this.dblClick.emit(rec);
+  }
+
+  onAdd() {
+    this.add.emit();
+  }
+
+  onSearch(event) {
+    // this.search.emit();
+  }
+
+  onClickSearch() {
+
+    this.paginator.pageIndex = 0;
+
+    this.tbCrud.onClickSearch();
+  }
+
+  onCancelSearch() {
+    this.params.searching = this.tbCrud.searching;
+    this.dataSource.filter = null;
+
+    this.paginator.pageIndex = 0;
+
+    this.setPaginationQueryParameters();
+    this.setParams();
+  }
+
+  onFilter(filterValue: string) {
+
+    if (this.tbCrud.searching) {
+      this.dataSource.filter = this.tbCrud.keyWord;
+    }
+
+    this.paginator.pageIndex = 0;
+
+    this.setParams();
+  }
+
+  onPaginate() {
+    this.setParams();
+    this.paginator.pageIndex = Number(this.params.offset);
+    this.paginator.pageSize = Number(this.params.limit);
+  }
+
+  onPaginateAPI() {
+    this.setParams();
+    if (this.paginator) {
+      this.paginator.pageIndex = Number(this.params.offset);
+      this.paginator.pageSize = Number(this.params.limit);
+    } else {
+      console.log('No IndexSimpleComponent Paginator');
+    }
+    // console.log('OPAAAAA', this.isInitializating);
+    // if (!this.isInitializating) {
+    //   this.onRefresh();
+    // }
+  }
+
+  setParams() {
+
+    this.params = JSON.parse(localStorage.getItem(this.localParams));
+
+    if (!this.params) {
+
+      this.params = {};
+      this.params.offset = 0;
+      this.params.limit = 10;
+      this.params.searching = false;
+      this.params.keyWord = null;
+    } else {
+      this.params.searching = this.tbCrud.searching;
+      if (this.params.searching) {
+        this.params.keyWord = this.tbCrud.keyWord;
+      }
+
+      if (this.paginator && !this.isInitializating) {
+        this.params.offset = this.paginator.pageIndex;
+        this.params.limit = this.paginator.pageSize;
+      }
+    }
+
+    localStorage.setItem(this.localParams, JSON.stringify(this.params));
+    this.setPaginationQueryParameters();
+  }
+
+  initParams() {
+    this.params = JSON.parse(localStorage.getItem(this.localParams));
+
+    if (!this.params) {
+      this.params = {};
+      this.params.offset = 0;
+      this.params.limit = 10;
+      this.params.searching = false;
+      this.params.keyWord = null;
+    }
+
+    this.activeRoute.queryParams.subscribe((params: any) => {
+      this.params = { ...this.params, ...params };
+    });
+
+    localStorage.setItem(this.localParams, JSON.stringify(this.params));
+  }
+
+
+  setPaginationQueryParameters() {
+
+    if (this.params.searching === 'true') {
+      this.dataSource.filter = this.params.keyWord;
+      this.paginator.pageIndex = 0;
+    }
+
+    this.router.navigate([], {
+      replaceUrl: true,
+      relativeTo: this.activeRoute,
+      queryParams: this.params,
+      queryParamsHandling: 'merge',
+      skipLocationChange: false
+    });
+  }
+
+  ngAfterViewInit() {
+    this.appStoreFacade.setTitle(this.titulo);
+
+    if (this.table) {
+      this.subscription = this.registros$.subscribe((data) => {
+        if (data) {
+          this.dataSource.data = data;
+
+          if (this.params.offset) {
+            this.paginator.pageIndex = Number(this.params.offset);
+          }
+
+          if (this.params.limit) {
+            this.paginator.pageSize = Number(this.params.limit);
+          }
+
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+
+          if (this.params.searching === 'true') {
+            this.paginator.pageIndex = 0;
+            this.onPaginateAPI();
+            this.tbCrud.searching = this.params.searching;
+            this.tbCrud.keyWord = this.params.keyWord;
+            this.tbCrud.setWordSearchInput();
+          }
+        }
+
+        if (this.isInitializating) {
+          this.onEnding();
+        }
+
+        this.hasData = true;
+
+      });
+
+
+      this.setParams();
+      this.onPaginateAPI();
+
+    }
+    this.ngDoCheck();
+  }
+
+  onEnding() {
+    if (this.dataSource.data) {
+      if (this.dataSource.data.length > 0) {
+        this.isInitializating = false;
+      }
+    }
+    this.isInitializating = false;
+  }
+
+  onSave(payload) {
+    this.store$.dispatch(new this.actionUpdate(payload));
+  }
+
+  ngDoCheck() {
+    this.cdRef.detectChanges();
+  }
+
+  // EXTREMAMENTE IMPORTANTE
+  @HostListener('window:beforeunload')
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+    this.dataSource.data = [];
+  }
+
+  setShortcuts() { }
+}

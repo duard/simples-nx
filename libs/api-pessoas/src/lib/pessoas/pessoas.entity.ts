@@ -1,10 +1,11 @@
 import { BaseMysqlEntity } from '@simples/api-shared';
-import { Column, Entity, JoinColumn, ApiProperty, OneToOne } from 'typeorm';
+import { Pessoa } from '@simples/shared/interfaces';
+import { Column, Entity, JoinColumn, OneToOne } from 'typeorm';
 
 import { UsuariosEntity } from '../usuarios/usuarios.entity';
 
 @Entity('pessoas')
-export class PessoasEntity extends BaseMysqlEntity {
+export class PessoasEntity extends BaseMysqlEntity<Pessoa> {
   @Column({
     type: 'enum',
     enum: ['F', 'J'],

@@ -1,0 +1,33 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.taiga-link {
+  margin: 12px;
+  font-size: 20px;
+}
+
+.axes {
+  height: 200px;
+  width: 400px;
+}
+
+.chart {
+  position: absolute;
+  color: #ffb74c;
+}
+
+.chart:first-child {
+  color: #bc71c9;
+}
+
+.chart:last-child {
+  color: #4dc3f7;
+}
+
+.links {
+  font-size: 15px;
+  padding-bottom: 40px;
+}

@@ -1,0 +1,233 @@
+<mat-toolbar color="primary" class="crud-toolbar mat-elevation-z4">
+  <button
+    mat-icon-button
+    [matMenuTriggerFor]="matMenuIndex"
+    *ngIf="showLeftMenu"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <span>{{ title }}</span>
+
+  <span class="menu-spacer"></span>
+
+  <div
+    *ngIf="
+      operation.toLowerCase() === 'edit' || operation.toLowerCase() === 'insert'
+    "
+    class="item item-3"
+    fxFlex="32%"
+    fxLayoutAlign="end center"
+  >
+    <button class="dirSpace" mat-button (click)="onCancel()" *ngIf="showCancel">
+      <mat-icon>arrow_back</mat-icon>
+      <span fxHide fxShow.gt-sm> {{ labelCancel }}</span>
+    </button>
+
+    <button class="dirSpace" mat-raised-button (click)="this.save.emit($event)">
+      <mat-icon>save</mat-icon>
+      <span fxHide fxShow.gt-sm>{{ labelConfirmar }}</span>
+    </button>
+
+    <button
+      class="dirSpace"
+      *ngIf="showProcessar"
+      mat-raised-button
+      (click)="this.processar.emit($event)"
+    >
+      <mat-icon>settings</mat-icon>
+      <span fxHide fxShow.gt-sm> {{ labelProcessar }}</span>
+    </button>
+
+    <button mat-button class="more-btn" [matMenuTriggerFor]="matMenuMore">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+  </div>
+
+  <div
+    *ngIf="operation.toLowerCase() === 'index'"
+    class="item item-3"
+    fxFlex="100%"
+    fxLayoutAlign="end center"
+  >
+    <div *ngIf="showSelect">
+      <mat-form-field class="select">
+        <mat-select
+          matNativControl
+          [value]="0"
+          [placeholder]="placeholderSelect"
+          (selectionChange)="onChangeSelect($event.value)"
+        >
+          <mat-option [value]="0">Todos</mat-option>
+          <mat-option
+            *ngFor="let registroSelect of registrosSelect"
+            [value]="registroSelect[idNameSelect]"
+          >
+            {{ registroSelect[descNameSelect] }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field *ngIf="searching" class="datepicker" floatLabel="never">
+      <input
+        matInput
+        #inputBuscar
+        type="text"
+        autocomplete="nope"
+        placeholder="Pesquisar"
+        (keyup)="applyFilter(inputBuscar.value)"
+        (keydown.control.f3)="onClickSearch()"
+        (keyup.enter)="filterByAPI(inputBuscar.value)"
+      />
+      <button
+        mat-button
+        *ngIf="value"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="value = ''"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <button class="dirSpace" mat-button (click)="onClickSearch()">
+      <mat-icon>search</mat-icon>
+    </button>
+
+    <div *ngIf="tipoPeriodo">
+      <mat-form-field class="datepicker">
+        <mat-select
+          matNativeControl
+          placeholder="Tipo Período"
+          [value]="periodo"
+          (selectionChange)="setParams($event.value, 'tipoPeriodo')"
+        >
+          <mat-option *ngFor="let c of tipoPeriodo" [value]="c.id">
+            {{ c.description }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div *ngIf="listaEventos">
+      <mat-form-field class="datepicker" style="width: 150px">
+        <mat-select
+          matNativeControl
+          placeholder="Selecione o Evento"
+          [value]="codigoEvento"
+          (selectionChange)="setParams($event.value, 'codigoEvento')"
+        >
+          <mat-option *ngFor="let c of listaEventos" [value]="c.CODIGO">
+            {{ c.DESCRICAO }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div *ngIf="datepicker">
+      <mat-form-field class="datepicker">
+        <input
+          (dateChange)="setParams($event.target.value, 'dtIni')"
+          matInput
+          [matDatepicker]="datepicker1"
+          [value]="dtIni"
+          [max]="dtNow"
+          placeholder="início"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          style="color: white"
+          [for]="datepicker1"
+        ></mat-datepicker-toggle>
+        <mat-datepicker
+          #datepicker1
+          disabled="false"
+          style="color: white"
+        ></mat-datepicker>
+      </mat-form-field>
+
+      <!-- <mat-form-field class="datepicker">
+        <input (dateChange)="setParams($event.target.value, 'dtIni')" matInput [matDatepicker]="datepicker1"
+          [value]="dtIni" [max]="dtNow"  placeholder="início">
+        <mat-datepicker-toggle matSuffix style="color: white" [for]="datepicker1"></mat-datepicker-toggle>
+        <mat-datepicker #datepicker1 disabled="false" style="color: white"></mat-datepicker>
+      </mat-form-field> -->
+
+      <mat-form-field class="datepicker">
+        <input
+          (dateChange)="setParams($event.target.value, 'dtFim')"
+          matInput
+          [matDatepicker]="datepicker2"
+          [value]="dtFim"
+          [min]="dtIni"
+          placeholder="final"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          style="color: white"
+          [for]="datepicker2"
+        ></mat-datepicker-toggle>
+        <mat-datepicker
+          #datepicker2
+          disabled="false"
+          style="color: white"
+        ></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div *ngIf="showAnoSelect">
+      <mat-form-field class="datepicker">
+        <mat-label>Ano</mat-label>
+        <mat-select
+          (selectionChange)="onChangeSelect($event)"
+          [value]="anoAtual"
+        >
+          <mat-option *ngFor="let ano of anoList" [value]="ano">
+            {{ ano }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <span *ngIf="matMenuFilter">
+      <button class="dirSpace" mat-button [matMenuTriggerFor]="matMenuFilter">
+        <mat-icon>filter_list</mat-icon>
+        <span fxHide fxShow.gt-sm>Filtrar</span>
+      </button>
+    </span>
+
+    <button
+      class="dirSpace"
+      mat-button
+      (click)="this.refresh.emit(params)"
+      (keyup.F6)="this.refresh.emit(params)"
+    >
+      <mat-icon>refresh</mat-icon>
+      <span fxHide fxShow.gt-sm>Atualizar</span>
+    </button>
+
+    <span *ngIf="showAddButton">
+      <button
+        class="dirSpace"
+        mat-raised-button
+        (click)="this.add.emit($event)"
+      >
+        <mat-icon>add</mat-icon>
+        <span fxHide fxShow.gt-sm> {{ labelAdd }}</span>
+      </button>
+    </span>
+    <!-- <button *ngIf="showMenuButton"
+    mat-button class="more-btn"
+    [matMenuTriggerFor]="matMenuMore">
+      <mat-icon>more_vert</mat-icon>
+    </button> -->
+
+    <span *ngIf="matMenuMore">
+      <button mat-button class="more-btn" [matMenuTriggerFor]="matMenuMore">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </span>
+  </div>
+</mat-toolbar>

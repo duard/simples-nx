@@ -1,0 +1,38 @@
+<mat-sidenav-container fullscreen>
+  <mat-sidenav
+    #sidenav
+    mode="side"
+    opened="isExpanded"
+    (mouseenter)="mouseenter()"
+    *ngIf="leftSideNav$ | async"
+    (mouseleave)="mouseleave()"
+    (menuButtonClick)="onChangeLeftSideNav()"
+  >
+    <simples-sidenav
+      (sideNavClosed)="onChangeLeftSideNav()"
+      [menuItens]="appitems"
+    ></simples-sidenav>
+  </mat-sidenav>
+
+  <mat-sidenav-content fxLayout="column">
+    <div class="header">
+      <simples-header-mobile (sideNavClosed)="onChangeLeftSideNav()">
+      </simples-header-mobile>
+    </div>
+    <mat-progress-bar
+      *ngIf="navigationLoading$ | async"
+      style="display: flex; justify-content: center; align-items: center"
+      color="primary"
+      mode="indeterminate"
+    >
+    </mat-progress-bar>
+    <main class="container mat-app-background">
+      <router-outlet></router-outlet>
+    </main>
+
+    <div class="footer">
+      <simples-footer-mobile (sideNavClosed)="onChangeLeftSideNav()">
+      </simples-footer-mobile>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

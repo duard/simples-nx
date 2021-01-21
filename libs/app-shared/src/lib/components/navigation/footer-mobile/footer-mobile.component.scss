@@ -1,0 +1,28 @@
+// Fix toolbar to the bottom and make it 50px in height
+footer {
+  position: fixed;
+  bottom: 0px;
+  overflow: hide;
+  width: 100%;
+  z-index: 9999999999;
+  // height: 50px; // Note: iPhonePlus requires 80px, so will need to be variable, but not handling that in this demo.
+
+  z-index: 99;
+  // border-top: 2px solid #7c7a7a;
+  -webkit-box-shadow: 0px -4px 3px rgba(70, 70, 70, 0.45);
+  -moz-box-shadow: 0px -4px 3px rgba(50, 50, 50, 0.35);
+  box-shadow: 0px -4px 3px rgba(70, 70, 70, 0.25);
+}
+
+.toolbar-icon {
+  line-height: 0; // Set to zero or will affect spacing between icon and text
+}
+
+.toolbar-icon-text {
+  line-height: 1.8; // Proper spacing between icon and text
+  font-size: 70%; // Smaller text size for proper display under icon
+}
+
+.active-menu-item {
+  color: black;
+}

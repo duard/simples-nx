@@ -1,0 +1,8 @@
+HEAD is now at 39719c3 feat: first crud : falta notificações
+Removing apps/simples-tests-e2e/
+Removing apps/simples-tests/
+Removing dist/
+Removing libs/api-core/src/lib/services/
+Removing libs/app-cruds/src/lib/
+Removing libs/app-shared/src/lib/br-paginator-intl.ts
+Removing node_modules/

@@ -1,0 +1,68 @@
+<div class="wrapper" fxLayout="column">
+
+  <div class="header">
+    <mat-toolbar class="mat-elevation-z4" color="primary">
+      <span>Angular 9 Material CRUD</span>
+      <span class="spacer"></span>
+      Refresh:
+      <button mat-icon-button>
+        <mat-icon>refresh</mat-icon>
+      </button>
+    </mat-toolbar>
+  </div>
+
+  <div class="content main-container" #scrollContainer>
+    <mat-card class="card-demo">
+      <mat-card-title><a href="https://github.com/angular/flex-layout/issues/181" target="_blank">
+          Issue #181</a></mat-card-title>
+      <mat-card-subtitle>Wrong layout when fxHide + fxShow usages do not cooperate properly:
+      </mat-card-subtitle>
+      <mat-card-content>
+        <div class="containerX">
+
+          <div style="text-align:center" [ngClass]="'style-' + style">
+            <button (click)="themeChangeHandler('deep-blue')">Load Style 1</button>
+            <button (click)="themeChangeHandler('/assets/material-styles/deeppurple-amber.css')">Load Style 2</button>
+          </div>
+
+          <p *ngFor="let item of fakeArray(30);">
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's
+            standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
+            make a
+            type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
+            remaining
+            essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem
+            Ipsum
+            passages, and more recently with desktop publishing software like Aldus PageMaker including versions of
+            Lorem Ipsum.
+          </p>
+
+          <div class="coloredContainerX box fixed" [fxLayout]="direction" (click)="pivot()">
+            <div fxHide fxShow.gt-xs class="box1"> Type 1, row a, fxHide fxShow.gt-xs</div>
+            <div fxHide fxShow.gt-xs class="box2"> Type 1, row b, fxHide fxShow.gt-xs</div>
+            <div fxHide fxShow.gt-xs class="box3"> Type 1, row c, fxHide fxShow.gt-xs</div>
+
+            <div fxShow fxHide.md class="box1"> Type 2, row a, fxShow fxHide.md</div>
+            <div fxShow fxHide.md class="box2"> Type 2, row b, fxShow fxHide.md</div>
+            <div fxShow fxHide.md class="box3"> Type 2, row c, fxShow fxHide.md</div>
+          </div>
+
+          <p>coloquei coisas aqui</p>
+
+          <div fxHide fxShow.gt-sm>Maior que smartphone</div>
+
+          <div fxShow fxHide.md>Outros tamanhos</div>
+
+
+        </div>
+      </mat-card-content>
+      <mat-card-footer style="width:95%;padding-left:20px;margin-top:-5px;">
+        <media-query-status></media-query-status>
+      </mat-card-footer>
+    </mat-card>
+  </div>
+
+  <div class="footer">
+  </div>
+</div>

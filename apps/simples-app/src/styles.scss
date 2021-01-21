@@ -1,1 +1,189 @@
+// @import 'tailwindcss/base';
+// @import 'tailwindcss/components';
+// @import 'tailwindcss/utilities';
 /* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+/* Add application styles & imports to this file! */
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+body {
+  font-family: Roboto, Arial, sans-serif;
+  margin: 0;
+}
+
+.mat-toolbar {
+  min-height: 50px !important;
+  height: 50px !important;
+}
+
+.mat-toolbar-row {
+  min-height: 50px !important;
+  height: 50px !important;
+}
+
+.menu-spacer {
+  flex: 1 1 auto;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  // margin-right: 5px;
+  overflow: hidden;
+}
+.header,
+.footer {
+  z-index: 99;
+}
+.content {
+  flex: 1;
+  overflow: hidden;
+  z-index: 9 !important;
+}
+
+.footer {
+  z-index: 99;
+  // border-top: 2px solid #7c7a7a;
+  -webkit-box-shadow: 0px -4px 3px rgba(70, 70, 70, 0.45);
+  -moz-box-shadow: 0px -4px 3px rgba(50, 50, 50, 0.35);
+  box-shadow: 0px -4px 3px rgba(70, 70, 70, 0.25);
+}
+
+.mat-paginator {
+  background: transparent !important;
+}
+
+.mat-paginator-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-height: 56px;
+  padding: 0px !important;
+  flex-wrap: wrap-reverse;
+  width: 100%;
+  background-color: transparent;
+  color: whitesmoke;
+}
+
+.mat-paginator {
+  display: block;
+  color: whitesmoke !important;
+
+  .mat-select-value {
+    color: white !important;
+    text-align: center;
+    // font-weight: bold;
+    // font-size: 15px;
+  }
+
+  .mat-select-value-text {
+    color: whitesmoke !important;
+  }
+}
+
+table {
+  width: 100%;
+}
+
+.centralizado {
+  text-align: center;
+}
+
+.adireita {
+  text-align: right;
+  padding-right: 5px;
+}
+
+.aesquerda {
+  text-align: left;
+}
+
+.sidenav-container {
+  height: calc(100%);
+  z-index: 5;
+  // background-color: burlywood;
+  // padding: 50px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+// .main-container {
+//   overflow-y: auto;
+//   overflow-x: hidden;
+//   height: 100vh !important;
+//   position: relative;
+//   padding: 10px;
+//   padding-top: 0px;
+//   padding-bottom: 0px;
+//   // background-color: #dcdcdc;
+//   // margin: 25px;
+//   z-index: 20;
+// }
+
+.container {
+  // flex: 1 0 auto;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
+
+  position: relative;
+  // padding: 10px;
+  // padding-top: 10px;
+  // padding-bottom: 0px;
+  // background-color: gold;
+  // margin: 25px;
+  // margin-bottom: 50px;
+  z-index: 20;
+
+  // background-color:rgb(216, 216, 216);
+  // margin-left: 12px;
+}
+
+.main-container {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100vh !important;
+  position: relative;
+  padding: 10px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  // background-color: #dcdcdc;
+  // margin: 25px;
+  z-index: 20;
+}
+
+sis-toolbar-crud-simples {
+  padding: 0px;
+  z-index: 99990;
+  background-color: red;
+}
+
+.mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float
+  .mat-form-field-label:not(.mat-empty):not(.mat-form-field-empty) {
+  // color
+  // scale or font-size
+  font-size: 18px;
+  // color: green;
+}
+
+.ngneat-dialog-content {
+  max-height: unset;
+}

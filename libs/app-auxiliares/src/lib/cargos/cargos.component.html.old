@@ -1,0 +1,123 @@
+<mat-toolbar class="mat-elevation-z4" color="primary">
+  <span>Angular 9 Material CRUD</span>
+  <span class="spacer"></span>
+  Refresh:
+  <button mat-icon-button (click)="reload()">
+    <mat-icon>refresh</mat-icon>
+  </button>
+</mat-toolbar>
+
+<mat-card class="card-demo">
+  <mat-card-title><a href="https://github.com/angular/flex-layout/issues/181" target="_blank">
+    Issue #181</a></mat-card-title>
+  <mat-card-subtitle>Wrong layout when fxHide + fxShow usages do not cooperate properly:
+  </mat-card-subtitle>
+  <mat-card-content>
+    <div class="containerX">
+
+      <code>
+        <pre>
+          {{ data$ | async | json}}
+        </pre>
+      </code>
+
+      <p *ngFor="let item of fakeArray(30);">
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+        standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
+        type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining
+        essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum
+        passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+      </p>
+
+
+      <p>
+        cargos works! 1
+      </p>
+      <p>
+        cargos works! 2
+      </p>
+      <p>
+        cargos works! 3
+      </p>
+      <p>
+        cargos works!
+      </p>
+      <p>
+        cargos works!
+      </p>
+      <p>
+        cargos works!
+      </p>
+      <p>
+        cargos works!
+      </p>
+      <p>
+        cargos works!
+      </p>
+      <p>
+        cargos works!
+      </p>
+      <p>
+        cargos works!
+      </p>
+      <p>
+        cargos works!
+      </p>
+      <p>
+        cargos works!
+      </p>
+      <p>
+        cargos works!
+      </p>
+      <p>
+        cargos works!
+      </p>
+      <p>
+        cargos works!
+      </p>
+      <p>
+        cargos works!
+      </p>
+      <p>
+        cargos works!
+      </p>
+      <p>
+        cargos works!
+      </p>
+      <p>
+        cargos works!
+      </p>
+      <p>
+        cargos works!
+      </p>
+      <p>
+        cargos works!
+      </p>
+      <p>
+        cargos works!
+      </p>
+      <p>
+        cargos works!
+      </p>
+      <p>
+        cargos works!
+      </p>
+      <p>
+        cargos works!
+      </p>
+      <p>
+        cargos works!
+      </p>
+      <p>
+        cargos works!
+      </p>
+
+
+    </div>
+  </mat-card-content>
+  <mat-card-footer style="width:95%;padding-left:20px;margin-top:-5px;">
+    <media-query-status></media-query-status>
+  </mat-card-footer>
+</mat-card>
+
+

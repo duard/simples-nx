@@ -56,6 +56,37 @@
     },
     "api-shared": {
       "tags": ["scope:shared", "type:shared"]
+    },
+    "pages": {
+      "tags": ["scope:pages", "type:pages"]
+    },
+    "app-shared": {
+      "tags": []
+    },
+    "app-store": {
+      "tags": ["scope:store", "type:store"]
+    },
+    "app-pessoas": {
+      "tags": []
+    },
+    "app-cruds": {
+      "tags": []
+    },
+    "app-auxiliares": {
+      "tags": []
+    },
+    "api-auxiliares": {
+      "tags": ["scope:auxiliares", "type:auxiliares"]
+    },
+    "app-core": {
+      "tags": ["scope:core", "type:core"]
+    },
+    "simples-tests": {
+      "tags": []
+    },
+    "simples-tests-e2e": {
+      "tags": [],
+      "implicitDependencies": ["simples-tests"]
     }
   }
 }

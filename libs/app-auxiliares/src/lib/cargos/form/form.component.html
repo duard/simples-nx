@@ -1,0 +1,87 @@
+<div class="wrapper">
+  <div class="header">
+    <app-toolbar-crud-dlg
+      [title]="titulo"
+      [operation]="operation"
+      [form]="formCRUD"
+      (save)="onSave($event)"
+      (cancel)="dlgRef.close()"
+      (delete)="onDelete()"
+      [deleteButton]="true"
+    ></app-toolbar-crud-dlg>
+  </div>
+
+  <div class="content">
+    <form
+      [formGroup]="formCRUD"
+      errorTailor
+      (keyup.escape)="dlgRef.close()"
+      (keydown.control.delete)="onDelete()"
+    >
+      <div
+        class="container"
+        fxLayout
+        fxLayout.xs="column"
+        fxLayoutAlign="start center"
+        fxLayoutGap="10px"
+        fxLayoutGap.xs="0"
+      >
+        <div class="item item-1" fxFlex="100%">
+          <mat-form-field class="full-width">
+            <mat-label>Descrição</mat-label>
+
+            <input
+              type="text"
+              #inputDescription
+              formControlName="description"
+              matInput
+              placeholder="Description"
+              cdkFocusRegionstart
+              [controlErrorAnchor]="nameError"
+            />
+
+            <mat-error>
+              <ng-template
+                controlErrorAnchor
+                #nameError="controlErrorAnchor"
+              ></ng-template>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div
+        fxLayout
+        fxLayout.xs="column"
+        fxLayoutAlign="start center"
+        fxLayoutGap="10px"
+        fxLayoutGap.xs="0"
+      >
+        <div class="item item-4" fxFlex="100%">
+          <div fxLayout="row" fxLayoutAlign="start start">
+            <mat-checkbox formControlName="isActive">Ativo</mat-checkbox>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <!-- <div class="footer-base">
+    <mat-divider></mat-divider>
+    <div fxLayout fxLayout.xs="column" fxLayoutAlign="end center" fxLayoutGap="10px" fxLayoutGap.xs="10px">
+      <div class="item item-4" fxFlex="100%">
+        <button mat-button color="accent">Cancelar</button>
+        <button mat-raised-button color="primary">Salvar</button>        
+      </div>
+    </div>
+  </div> -->
+  <mat-divider></mat-divider>
+  <div
+    class="footer-base"
+    fxLayout="row"
+    fxLayoutAlign="end center"
+    fxLayoutGap="10px"
+  >
+    <button mat-button color="warn" (click)="dlgRef.close()">Cancelar</button>
+    <button mat-raised-button color="primary" (click)="onSave()">Salvar</button>
+  </div>
+</div>

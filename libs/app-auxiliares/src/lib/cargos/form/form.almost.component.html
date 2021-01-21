@@ -1,0 +1,92 @@
+<div class="sidenav-container" fxLayout="column" (keyup.escape)="onCancel()">
+
+
+  <div class="fixActionRow" (keyup.escape)="onCancel()">
+    <div class="header-container" (keyup.escape)="onCancel()">
+      <div class="wrapper">
+        <div class="header">
+          <mat-toolbar class="mat-elevation-z4" color="primary">
+            <span>{{titulo}}</span>
+            <span class="spacer"></span>
+            Refresh:
+            <button mat-icon-button>
+              <mat-icon>refresh</mat-icon>
+            </button>
+          </mat-toolbar>
+        </div>
+      </div>
+    </div>
+    <mat-dialog-content (keyup.escape)="onCancel()">
+      <form [formGroup]='formCRUD' (keyup.escape)="onCancel()" (keydown.control.delete)="onDelete()">
+
+        <div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="start center" fxLayoutGap="10px"
+          fxLayoutGap.xs="0">
+
+          <div class="item item-2" fxFlex="50%">
+            <mat-form-field class="full-width">
+              <input type="text" #inputId formControlName="id" matInput placeholder="id" cdkFocusRegionstart>
+            </mat-form-field>
+          </div>
+
+
+
+          <div class="item item-1" fxFlex="50%">
+            <mat-form-field class="full-width">
+              <input type="text" #inputDescription formControlName="description" matInput placeholder="Description"
+                cdkFocusRegionstart>
+            </mat-form-field>
+          </div>
+
+
+        </div>
+
+
+
+        <div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="start center" fxLayoutGap="10px"
+          fxLayoutGap.xs="0">
+          <!-- <div class="item item-1" fxFlex="25%">
+              <mat-form-field class="full-width">
+                <input type="text" #inputIconName formControlName="iconName" matInput placeholder="Ícone"
+                  cdkFocusRegionstart>
+              </mat-form-field>
+            </div>
+            <div class="item item-2" fxFlex="25%">
+              <mat-form-field class="full-width">
+                <input type="text" #inputBadge formControlName="badge" matInput placeholder="Badge" cdkFocusRegionstart>
+              </mat-form-field>
+            </div>
+            <div class="item item-3" fxFlex="25%">
+              <mat-form-field class="full-width">
+                <input type="text" #inputBadgeBackground formControlName="badgeBackground" matInput placeholder="Cor"
+                  cdkFocusRegionstart>
+              </mat-form-field>
+            </div> -->
+          <div class="item item-4" fxFlex="20%">
+
+            <div fxLayout="row" fxLayoutAlign="start start">
+              <section class="example-section">
+                <div>
+                  <mat-slide-toggle formControlName="isActive" [checked]="1" (change)="onChange($event.checked)">
+                    {{isActive}}
+                  </mat-slide-toggle>
+                </div>
+              </section>
+            </div>
+
+          </div>
+        </div>
+
+
+
+      </form>
+    </mat-dialog-content>
+  </div>
+</div>
+
+
+
+
+
+<pre>{{ ref.data.payload | json}}</pre>
+<pre>{{ formCRUD.value | json}}</pre>
+<button (click)="ref.close()">Close</button>

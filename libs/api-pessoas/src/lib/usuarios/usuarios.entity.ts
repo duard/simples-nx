@@ -6,7 +6,7 @@ import { PessoasEntity } from '../pessoas/pessoas.entity';
 // import { PessoasEntity } from '../pessoas';
 
 @Entity('usuarios')
-export class UsuariosEntity extends BaseMysqlEntity {
+export class UsuariosEntity extends BaseMysqlEntity<Usuario> {
   // @OneToOne(() => PessoasEntity)
   // @JoinColumn()
   // pessoa: PessoasEntity;
@@ -56,5 +56,5 @@ export class UsuariosEntity extends BaseMysqlEntity {
   checked: number;
 
   @Column({ type: 'int', name: 'qtd_resets', default: 0, nullable: true })
-  block: number;
+  blocked: number;
 }

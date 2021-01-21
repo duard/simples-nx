@@ -1,0 +1,43 @@
+.mat-header-cell {
+  font-size: 14px !important;
+}
+
+.mat-column-id {
+  color: rgb(56, 56, 56) !important;
+  padding-right: 10px !important;
+  font-weight: bold;
+  max-width: 120px !important;
+  min-width: 32px !important;
+  width: 32px !important;
+}
+
+.mat-column-acoes {
+  color: #333;
+  // padding-right: 10px;
+  // font-weight: bold;
+  max-width: 40px !important;
+  width: 40px;
+}
+
+.mat-column-description {
+  // color: #222;
+  padding-right: 5px;
+  min-width: 120px !important;
+  // width: 90%;
+}
+
+.mat-column-createdAt {
+  color: rgb(138, 138, 138) !important;
+  padding-right: 5px;
+  min-width: 115px !important;
+  width: 115px;
+  text-align: left;
+}
+
+.mat-column-updatedAt {
+  color: rgb(118, 118, 118) !important;
+  padding-right: 5px;
+  min-width: 115px !important;
+  width: 115px;
+  text-align: left;
+}

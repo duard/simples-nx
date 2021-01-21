@@ -1,0 +1,23 @@
+<code>
+<div *ngIf=" isDev" fxLayout="row" fxLayoutAlign="space-between" [ngStyle]="{'color': form.valid ? 'green' : 'red' }">
+  Modo Developer &nbsp; - &nbsp; {{form.valid}}
+</div>
+<div *ngIf="isDev" fxLayout="row">
+  <mat-divider></mat-divider>
+</div>
+<div *ngIf="isDev" fxLayout="row">
+  <small>
+    <!-- <pre>Development: {{isDev | json}}</pre> -->
+    <pre>isValid: {{form.valid}}</pre>
+    <pre>isDirty: {{form.dirty}}</pre>
+    <pre>isPristine: {{form.pristine}}</pre>
+    <pre>isTouched: {{form.touched}}</pre>
+    <!-- <pre>isValid: {{form.valid}}</pre> -->
+  </small>
+</div>
+<div *ngIf="isDev" fxLayout="row">
+  <small>
+    <pre>FormCRUD: {{form.value  | json}}</pre>
+  </small>
+</div>
+</code>

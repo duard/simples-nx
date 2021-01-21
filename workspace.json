@@ -8,7 +8,7 @@
       "prefix": "simples",
       "targets": {
         "build": {
-          "executor": "@angular-devkit/build-angular:browser",
+          "executor": "@angular-builders/custom-webpack:browser",
           "options": {
             "outputPath": "dist/apps/simples-app",
             "index": "apps/simples-app/src/index.html",
@@ -18,13 +18,23 @@
             "aot": true,
             "assets": [
               "apps/simples-app/src/favicon.ico",
-              "apps/simples-app/src/assets"
+              "apps/simples-app/src/assets",
+              {
+                "glob": "**/*",
+                "input": "node_modules/@taiga-ui/icons/src",
+                "output": "assets/taiga-ui/icons"
+              }
             ],
-            "styles": [
-              "apps/simples-app/src/styles.scss",
-              "libs/styles/src/index.scss"
-            ],
-            "scripts": []
+            "styles": ["apps/simples-app/src/styles.scss", "libs/styles/src/index.scss"],
+            "stylePreprocessorOptions": {
+              "includePaths": ["libs/styles/src/", "libs/styles/src/lib/", "libs/styles/src/lib/"]
+            },
+            "extractCss": true,
+            "scripts": [],
+            "allowedCommonJsDependencies": ["hammerjs"],
+            "customWebpackConfig": {
+              "path": "webpack.config.js"
+            }
           },
           "configurations": {
             "production": {
@@ -57,7 +67,7 @@
           }
         },
         "serve": {
-          "executor": "@angular-devkit/build-angular:dev-server",
+          "executor": "@angular-builders/custom-webpack:dev-server",
           "options": {
             "browserTarget": "simples-app:build",
             "proxyConfig": "apps/simples-app/proxy.conf.json"
@@ -82,17 +92,12 @@
               "apps/simples-app/tsconfig.spec.json",
               "apps/simples-app/tsconfig.editor.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/simples-app/**/*"
-            ]
+            "exclude": ["**/node_modules/**", "!apps/simples-app/**/*"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/apps/simples-app"
-          ],
+          "outputs": ["coverage/apps/simples-app"],
           "options": {
             "jestConfig": "apps/simples-app/jest.config.js",
             "passWithNoTests": true
@@ -121,13 +126,145 @@
         "lint": {
           "executor": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "apps/simples-app-e2e/tsconfig.e2e.json"
+            "tsConfig": ["apps/simples-app-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/simples-app-e2e/**/*"]
+          }
+        }
+      }
+    },
+    "simples-tests": {
+      "projectType": "application",
+      "root": "apps/simples-tests",
+      "sourceRoot": "apps/simples-tests/src",
+      "prefix": "simples",
+      "targets": {
+        "build": {
+          "executor": "@angular-builders/custom-webpack:browser",
+          "options": {
+            "outputPath": "dist/apps/simples-tests",
+            "index": "apps/simples-tests/src/index.html",
+            "main": "apps/simples-tests/src/main.ts",
+            "polyfills": "apps/simples-tests/src/polyfills.ts",
+            "tsConfig": "apps/simples-tests/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/simples-tests/src/favicon.ico",
+              "apps/simples-tests/src/assets",
+              {
+                "glob": "**/*",
+                "input": "node_modules/@taiga-ui/icons/src",
+                "output": "assets/taiga-ui/icons"
+              }
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/simples-app-e2e/**/*"
-            ]
+            "styles": [
+              "apps/simples-tests/src/styles.scss",
+              "node_modules/@taiga-ui/core/styles/taiga-ui-global.less",
+              "node_modules/@taiga-ui/core/styles/taiga-ui-theme.less",
+
+              "node_modules/@taiga-ui/core/styles/theme/variables.less",
+              "node_modules/@taiga-ui/core/styles/theme/wrapper.less"
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": ["libs/styles/src/", "libs/styles/src/lib/", "libs/styles/src/lib/"]
+            },
+            "extractCss": true,
+            "scripts": [],
+            "allowedCommonJsDependencies": ["hammerjs"],
+            "customWebpackConfig": {
+              "path": "webpack.config.js"
+            }
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/simples-tests/src/environments/environment.ts",
+                  "with": "apps/simples-tests/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@angular-builders/custom-webpack:dev-server",
+          "options": {
+            "browserTarget": "simples-tests:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "simples-tests:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "executor": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "simples-tests:build"
+          }
+        },
+        "lint": {
+          "executor": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/simples-tests/tsconfig.app.json",
+              "apps/simples-tests/tsconfig.spec.json",
+              "apps/simples-tests/tsconfig.editor.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/simples-tests/**/*"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/simples-tests"],
+          "options": {
+            "jestConfig": "apps/simples-tests/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "simples-tests-e2e": {
+      "root": "apps/simples-tests-e2e",
+      "sourceRoot": "apps/simples-tests-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/simples-tests-e2e/cypress.json",
+            "tsConfig": "apps/simples-tests-e2e/tsconfig.e2e.json",
+            "devServerTarget": "simples-tests:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "simples-tests:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/simples-tests-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/simples-tests-e2e/**/*"]
           }
         }
       }
@@ -140,21 +277,16 @@
       "targets": {
         "build": {
           "executor": "@nrwl/node:build",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/apps/simples-api",
             "main": "apps/simples-api/src/main.ts",
             "tsConfig": "apps/simples-api/tsconfig.app.json",
-            "assets": [
-              "apps/simples-api/src/assets"
-            ]
+            "assets": ["apps/simples-api/src/assets"],
+            "showCircularDependencies": false
           },
           "configurations": {
             "production": {
-
-
               "optimization": true,
               "extractLicenses": true,
               "inspect": false,
@@ -176,16 +308,12 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/simples-api/**/*.ts"
-            ]
+            "lintFilePatterns": ["apps/simples-api/**/*.ts"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/apps/simples-api"
-          ],
+          "outputs": ["coverage/apps/simples-api"],
           "options": {
             "jestConfig": "apps/simples-api/jest.config.js",
             "passWithNoTests": true
@@ -209,16 +337,12 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/api-core/**/*.ts"
-            ]
+            "lintFilePatterns": ["libs/api-core/**/*.ts"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/api-core"
-          ],
+          "outputs": ["coverage/libs/api-core"],
           "options": {
             "jestConfig": "libs/api-core/jest.config.js",
             "passWithNoTests": true
@@ -234,16 +358,12 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/api-database/**/*.ts"
-            ]
+            "lintFilePatterns": ["libs/api-database/**/*.ts"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/api-database"
-          ],
+          "outputs": ["coverage/libs/api-database"],
           "options": {
             "jestConfig": "libs/api-database/jest.config.js",
             "passWithNoTests": true
@@ -259,16 +379,12 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/api-cruds/**/*.ts"
-            ]
+            "lintFilePatterns": ["libs/api-cruds/**/*.ts"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/api-cruds"
-          ],
+          "outputs": ["coverage/libs/api-cruds"],
           "options": {
             "jestConfig": "libs/api-cruds/jest.config.js",
             "passWithNoTests": true
@@ -284,16 +400,12 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/api-pessoas/**/*.ts"
-            ]
+            "lintFilePatterns": ["libs/api-pessoas/**/*.ts"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/api-pessoas"
-          ],
+          "outputs": ["coverage/libs/api-pessoas"],
           "options": {
             "jestConfig": "libs/api-pessoas/jest.config.js",
             "passWithNoTests": true
@@ -309,16 +421,12 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/shared/interfaces/**/*.ts"
-            ]
+            "lintFilePatterns": ["libs/shared/interfaces/**/*.ts"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/shared/interfaces"
-          ],
+          "outputs": ["coverage/libs/shared/interfaces"],
           "options": {
             "jestConfig": "libs/shared/interfaces/jest.config.js",
             "passWithNoTests": true
@@ -334,18 +442,196 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/api-shared/**/*.ts"
-            ]
+            "lintFilePatterns": ["libs/api-shared/**/*.ts"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/api-shared"
-          ],
+          "outputs": ["coverage/libs/api-shared"],
           "options": {
             "jestConfig": "libs/api-shared/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "pages": {
+      "projectType": "library",
+      "root": "libs/pages",
+      "sourceRoot": "libs/pages/src",
+      "prefix": "simples",
+      "targets": {
+        "lint": {
+          "executor": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/pages/tsconfig.lib.json", "libs/pages/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/pages/**/*"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/pages"],
+          "options": {
+            "jestConfig": "libs/pages/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "app-shared": {
+      "projectType": "library",
+      "root": "libs/app-shared",
+      "sourceRoot": "libs/app-shared/src",
+      "prefix": "simples",
+      "targets": {
+        "lint": {
+          "executor": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/app-shared/tsconfig.lib.json", "libs/app-shared/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/app-shared/**/*"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/app-shared"],
+          "options": {
+            "jestConfig": "libs/app-shared/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "app-store": {
+      "projectType": "library",
+      "root": "libs/app-store",
+      "sourceRoot": "libs/app-store/src",
+      "prefix": "simples",
+      "targets": {
+        "lint": {
+          "executor": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/app-store/tsconfig.lib.json", "libs/app-store/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/app-store/**/*"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/app-store"],
+          "options": {
+            "jestConfig": "libs/app-store/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "app-pessoas": {
+      "projectType": "library",
+      "root": "libs/app-pessoas",
+      "sourceRoot": "libs/app-pessoas/src",
+      "prefix": "simples",
+      "targets": {
+        "lint": {
+          "executor": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/app-pessoas/tsconfig.lib.json", "libs/app-pessoas/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/app-pessoas/**/*"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/app-pessoas"],
+          "options": {
+            "jestConfig": "libs/app-pessoas/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "app-cruds": {
+      "projectType": "library",
+      "root": "libs/app-cruds",
+      "sourceRoot": "libs/app-cruds/src",
+      "prefix": "simples",
+      "targets": {
+        "lint": {
+          "executor": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/app-cruds/tsconfig.lib.json", "libs/app-cruds/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/app-cruds/**/*"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/app-cruds"],
+          "options": {
+            "jestConfig": "libs/app-cruds/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "app-auxiliares": {
+      "projectType": "library",
+      "root": "libs/app-auxiliares",
+      "sourceRoot": "libs/app-auxiliares/src",
+      "prefix": "simples",
+      "targets": {
+        "lint": {
+          "executor": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/app-auxiliares/tsconfig.lib.json", "libs/app-auxiliares/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/app-auxiliares/**/*"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/app-auxiliares"],
+          "options": {
+            "jestConfig": "libs/app-auxiliares/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "api-auxiliares": {
+      "root": "libs/api-auxiliares",
+      "sourceRoot": "libs/api-auxiliares/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/api-auxiliares/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/api-auxiliares"],
+          "options": {
+            "jestConfig": "libs/api-auxiliares/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "app-core": {
+      "projectType": "library",
+      "root": "libs/app-core",
+      "sourceRoot": "libs/app-core/src",
+      "prefix": "simples",
+      "targets": {
+        "lint": {
+          "executor": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/app-core/tsconfig.lib.json", "libs/app-core/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/app-core/**/*"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/app-core"],
+          "options": {
+            "jestConfig": "libs/app-core/jest.config.js",
             "passWithNoTests": true
           }
         }

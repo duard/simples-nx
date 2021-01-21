@@ -1,8 +1,8 @@
 export interface Base {
-  id: number;
-  dt_created: Date;
-  dt_updated: Date;
-  dt_deleted: Date;
-  deleted: boolean;
-  active: boolean;
+  id?: number;
+  createdAt?: Date;
+  updatedAt?: Date;
+  deletedAt?: Date;
+  isDeleted?: boolean;
+  isActive?: boolean;
 }

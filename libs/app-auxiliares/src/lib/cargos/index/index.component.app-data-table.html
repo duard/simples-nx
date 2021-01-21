@@ -1,0 +1,8 @@
+<div class="mat-elevation-z3" *ngIf="data$ | async as issues; else loading">
+  <app-data-table fxFlex [data]="data$ | async" [config]="configuration" [isPaginated]="true" [isUpdated]="true"
+    [isDeleted]="false">
+  </app-data-table>
+</div>
+
+
+<ng-template #loading>Loading...</ng-template>

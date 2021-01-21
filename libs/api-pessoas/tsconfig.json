@@ -10,12 +10,5 @@
       "path": "./tsconfig.spec.json"
     }
   ],
-  "compilerOptions": {
-    "types": ["node", "jest"],
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "module": "commonjs",
-    "target": "esnext"
-  },
   "include": ["**/*.ts"]
 }

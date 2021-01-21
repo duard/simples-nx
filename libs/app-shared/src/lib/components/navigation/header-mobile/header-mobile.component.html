@@ -1,0 +1,56 @@
+<mat-toolbar class="mat-elevation-z4" color="primary" fxHide fxShow.lt-sm>
+  <div class="toolbar-icon">
+    <mat-icon *ngIf="showBackArrow" alt="back arrow"> arrow_back </mat-icon>
+  </div>
+
+  <span class="fill-space"></span>
+
+  <div class="toolbar-icon">
+    <mat-icon>account_circle</mat-icon>
+  </div>
+</mat-toolbar>
+
+<header fxHide fxShow.gt-xs>
+  <mat-toolbar class="mat-elevation-z4" color="primary">
+    <button mat-icon-button *ngIf="!(leftSideNav$ | async)">
+      <mat-icon (click)="onLeftSideNavBackClick()">arrow_forward</mat-icon>
+    </button>
+
+    <button mat-icon-button>
+      <mat-icon (click)="onMenuClick()">menu</mat-icon></button
+    >{{ windowTitle }}
+
+    <span class="fill-remaining-space">
+      <mat-menu #menu="matMenu" [overlapTrigger]="false">
+        <button mat-menu-item>
+          <mat-icon>home</mat-icon>
+          <span>Home</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>people_outline</mat-icon>
+          <span>Connecting</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>videocam</mat-icon>
+          <span>Let's talk</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>exit_to_app</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
+    </span>
+
+    <!-- <span>Dora</span> -->
+    <span class="spacer"></span>
+    <app-menu-theme
+      [options]="options$ | async"
+      (themeChange)="themeChangeHandler($event)"
+    >
+    </app-menu-theme>
+
+    <button #r="matMenuTrigger" mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon (click)="onMenuClick()" (mouseover)="open(r)">menu</mat-icon>
+    </button>
+  </mat-toolbar>
+</header>

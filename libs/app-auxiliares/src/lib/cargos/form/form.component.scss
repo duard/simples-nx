@@ -1,0 +1,42 @@
+$height__main-toolbar: 64px;
+:host {
+  display: block;
+  height: 100%;
+  &:after {
+    right: 0;
+  }
+}
+
+.wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  // margin-right: 5px;
+}
+.header,
+.footer {
+  z-index: 99;
+}
+.content {
+  flex: 1;
+  overflow: auto;
+
+  z-index: 9 !important;
+  // min-height: 178px;
+  padding: 10px;
+}
+
+.footer-base {
+  z-index: 99;
+  height: 50px;
+  padding: 10px;
+}
+
+p {
+  color: blue;
+}
+
+cdk-overlay-container,
+.cdk-overlay-pane {
+  z-index: 9999 !important;
+}

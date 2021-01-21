@@ -1,6 +1,6 @@
 import { Column, PrimaryGeneratedColumn } from 'typeorm';
 
-export class BaseMysqlEntity  {
+export class BaseMysqlEntity<T>  {
   @PrimaryGeneratedColumn()
   id: number;
 
