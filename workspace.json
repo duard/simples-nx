@@ -70,7 +70,8 @@
           "executor": "@angular-builders/custom-webpack:dev-server",
           "options": {
             "browserTarget": "simples-app:build",
-            "proxyConfig": "apps/simples-app/proxy.conf.json"
+            "proxyConfig": "apps/simples-app/proxy.conf.json",
+            "port": 5000
           },
           "configurations": {
             "production": {
@@ -283,7 +284,7 @@
             "main": "apps/simples-api/src/main.ts",
             "tsConfig": "apps/simples-api/tsconfig.app.json",
             "assets": ["apps/simples-api/src/assets"],
-            "showCircularDependencies": false
+            "showCircularDependencies": true
           },
           "configurations": {
             "production": {

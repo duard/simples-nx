@@ -1,88 +1,57 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { CrudValidationGroups } from '@nestjsx/crud';
+import { BaseMysqlEntity, MESSAGES } from '@simples/api-shared';
+import { Menu } from '@simples/shared/interfaces';
 import { IsDefined, IsInt, IsOptional, IsString } from 'class-validator';
 import {
   Column,
-  CreateDateColumn,
   Entity,
   JoinColumn,
+  JoinTable,
+  ManyToMany,
   ManyToOne,
   OneToMany,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-  ManyToMany,
-  JoinTable,
-  RelationId,
+  PrimaryGeneratedColumn
 } from 'typeorm';
-import { MESSAGES } from '@meto/shared-things';
-import { Profile } from '../profile/profile.entity';
+
+import { ProfileEntity } from '../profile/profile.entity';
 
 const { CREATE, UPDATE } = CrudValidationGroups;
 
 @Entity('menus')
-export class Menu {
-  @ApiProperty()
-  @IsOptional({ always: true })
-  @PrimaryGeneratedColumn({ name: 'id_menu' })
-  id: number;
+export class MenusEntity extends BaseMysqlEntity<Menu> {
+  @Column({ name: 'index', nullable: false, type: 'smallint' })
+  index: number;
+
+  @Column({ name: 'title', type: 'varchar', length: 50, nullable: true })
+  title: string;
+
+  @Column({ name: 'icon', type: 'varchar', length: 30, nullable: true })
+  icon: string;
+
+  @Column({ name: 'link', unique: true, length: 250 })
+  link: string;
+
+  @Column({ name: 'type', type: 'varchar', length: 30, nullable: true })
+  type: string;
 
   @ApiProperty()
   @IsOptional({ groups: [UPDATE] })
-  @OneToMany(type => Menu, menu => menu.menu, { cascade: true, nullable: true, eager: true })
+  @OneToMany(() => MenusEntity, menu => menu.parentId, { cascade: true, nullable: true, eager: true })
   menus: Menu[];
 
   @ApiProperty()
   @IsOptional({ groups: [UPDATE] })
-  @ManyToOne(type => Menu, menu => menu.menus)
-  @JoinColumn({ name: 'id_menupai' })
-  menu: Menu;
-
-  @Column({ name: 'id_menupai', nullable: true })
-  parentId: number;
-
-  @ApiProperty()
-  @IsInt({ message: MESSAGES.IS_INT })
-  @IsOptional({ groups: [UPDATE] })
-  @IsDefined({ groups: [CREATE], message: MESSAGES.NOT_EMPTY })
-  @Column({ name: 'nr_ordem', nullable: false, type: 'smallint' })
-  index: number;
-
-  @ApiProperty()
-  @IsOptional({ groups: [UPDATE] })
-  @IsDefined({ groups: [CREATE], message: MESSAGES.NOT_EMPTY })
-  @IsString({ message: MESSAGES.IS_STRING })
-  @Column({ name: 'nm_menu', type: 'varchar', nullable: false, length: 50 })
-  title: string;
-
-  @ApiProperty()
-  @IsOptional({ groups: [UPDATE] })
-  @IsDefined({ groups: [CREATE], message: MESSAGES.NOT_EMPTY })
-  @IsString({ message: MESSAGES.IS_STRING })
-  @Column({ name: 'ur_menu', type: 'varchar', nullable: false, length: 250 })
-  url: string;
-
-  @ApiProperty()
-  @IsOptional({ groups: [UPDATE] })
-  @IsString({ message: MESSAGES.IS_STRING })
-  @Column({ name: 'nm_icone', type: 'varchar', length: 30, nullable: true })
-  icon: string;
+  @ManyToOne(() => MenusEntity, menu => menu.menus, { nullable: true })
+  @JoinColumn({ name: 'parent_id' })
+  parentId: Menu;
 
   @IsOptional({ groups: [CREATE, UPDATE] })
-  @ManyToMany(() => Profile)
+  @ManyToMany(() => ProfileEntity)
   @JoinTable({
     name: 'perfil_menu',
-    joinColumn: { name: 'id_menu', referencedColumnName: 'id' },
-    inverseJoinColumn: { name: 'id_perfil', referencedColumnName: 'id' },
+    joinColumn: { name: 'menu_id', referencedColumnName: 'id' },
+    inverseJoinColumn: { name: 'perfil_id', referencedColumnName: 'id' }
   })
-  profiles: Profile[];
-
-  @ApiProperty()
-  @Column({ name: 'sn_ativo', type: 'smallint', default: 1 })
-  status: number;
-
-  @Column({ name: 'dt_cadast', type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  createdAt: Date;
-
-  @Column({ name: 'dt_altera', type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  updatedAt: Date;
+  profiles: ProfileEntity[];
 }

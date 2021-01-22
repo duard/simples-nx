@@ -1,8 +1,4 @@
-import {
-  EntityMetadataMap,
-  EntityDataModuleConfig,
-  DefaultDataServiceConfig,
-} from '@ngrx/data';
+import { EntityMetadataMap, EntityDataModuleConfig, DefaultDataServiceConfig } from '@ngrx/data';
 
 export interface basicPaginationReponse {
   count: number;
@@ -15,9 +11,9 @@ export interface basicPaginationReponse {
 const moduleEntityMetadata: EntityMetadataMap = {
   Module: {
     additionalCollectionState: {
-      pageInfo: null,
-    },
-  },
+      pageInfo: null
+    }
+  }
 };
 
 const entityMetadata: EntityMetadataMap = {
@@ -27,54 +23,38 @@ const entityMetadata: EntityMetadataMap = {
         const lowercased = text.toLowerCase();
         return issues.filter(
           ({ title, description }) =>
-            title.toLowerCase().includes(lowercased) ||
-            description.toLowerCase().includes(lowercased)
+            title.toLowerCase().includes(lowercased) || description.toLowerCase().includes(lowercased)
         );
       } else {
         return issues;
       }
-    },
+    }
   },
-  // Cargos: {
-  //   filterFn: (data, text) => {
-  //     // console.log('recupera dados', data, text);
-  //     if (text) {
-  //       const lowercased = text.toLowerCase();
-  //       return data.filter(
-  //         ({ title, description }) =>
-  //           title.toLowerCase().includes(lowercased) ||
-  //           description.toLowerCase().includes(lowercased)
-  //       );
-  //     } else {
-  //       // console.log('dados', data);
-  //       return data;
-  //     }
-  //   },
-  //   additionalCollectionState: {
-  //     page: null,
-  //     pageCount: null,
-  //     total: null,
-  //     foo: 'teste 12'
-  //   },
-  // },
-
-  Cargos: {
-
+  Profiles: {
     additionalCollectionState: {
       count: null,
       page: null,
       pageCount: null,
       total: null,
-      foo: 'teste 12',
-    },
+      foo: 'teste 12'
+    }
   },
+  Cargos: {
+    additionalCollectionState: {
+      count: null,
+      page: null,
+      pageCount: null,
+      total: null,
+      foo: 'teste 12'
+    }
+  }
 };
 
-const pluralNames = { Cargos: 'Cargos' };
+const pluralNames = { Cargos: 'Cargos', Profiles: 'Profiles' };
 
 export const entityConfig: EntityDataModuleConfig = {
   entityMetadata,
-  pluralNames,
+  pluralNames
 };
 
 export const defaultDataServiceConfig: DefaultDataServiceConfig = {
@@ -87,7 +67,7 @@ export const defaultDataServiceConfig: DefaultDataServiceConfig = {
     //   collectionResourceUrl: '/api/cargos/',
     //   entityResourceUrl: '/api/cargos/',
     // },
-  },
+  }
 };
 
 /*

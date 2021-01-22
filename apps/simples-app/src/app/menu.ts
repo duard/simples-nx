@@ -5,7 +5,7 @@ export const navigation: any[] = [
     translate: 'NAV.DASHBOARDS',
     type: 'collapsable',
     icon: 'dashboard',
-    link: '/',
+    link: '/'
   },
   {
     id: 'testes',
@@ -13,7 +13,7 @@ export const navigation: any[] = [
     translate: 'NAV.CALENDAR',
     type: 'item',
     icon: 'build',
-    link: '/nx',
+    link: '/nx'
   },
   {
     id: 'auxiliares',
@@ -28,10 +28,10 @@ export const navigation: any[] = [
         type: 'item',
         link: '/auxiliares/cargos/index',
         exactMatch: false,
-        matchURL: function() {
+        matchURL: function () {
           // Some Logic
           return true;
-      }
+        }
       },
       {
         id: 'cargos2',
@@ -40,24 +40,24 @@ export const navigation: any[] = [
         link: '/auxiliares/cargos/',
         dontEmit: true,
         navigationExtras: {
-            queryParams: { order: 'popular', filter: 'new' },
+          queryParams: { order: 'popular', filter: 'new' }
         }
       },
       {
-        id: 'orders',
-        label: 'Orders',
+        id: 'profiles',
+        label: 'Perfis',
         type: 'item',
-        link: '/apps/e-commerce/orders',
-        exactMatch: true,
+        link: '/seguranca/profiles',
+        exactMatch: true
       },
       {
         id: 'orderDetail',
         label: 'Order Detail',
         type: 'item',
         link: '/apps/e-commerce/orders/1',
-        exactMatch: true,
-      },
-    ],
+        exactMatch: true
+      }
+    ]
   },
   {
     id: 'academy',
@@ -65,7 +65,7 @@ export const navigation: any[] = [
     translate: 'NAV.ACADEMY',
     type: 'item',
     icon: 'school',
-    link: '/apps/academy',
+    link: '/apps/academy'
   },
   {
     id: 'mail',
@@ -78,8 +78,8 @@ export const navigation: any[] = [
       label: '25',
       translate: 'NAV.MAIL.BADGE',
       bg: '#F44336',
-      fg: '#FFFFFF',
-    },
+      fg: '#FFFFFF'
+    }
   },
   {
     id: 'mail-ngrx',
@@ -92,8 +92,8 @@ export const navigation: any[] = [
       label: '13',
       translate: 'NAV.MAIL_NGRX.BADGE',
       bg: '#EC0C8E',
-      fg: '#FFFFFF',
-    },
+      fg: '#FFFFFF'
+    }
   },
   {
     id: 'chat',
@@ -102,7 +102,7 @@ export const navigation: any[] = [
     type: 'item',
     icon: 'chat',
     link: '/apps/chat',
-    badge: { label: '13', bg: '#09d261', fg: '#FFFFFF' },
+    badge: { label: '13', bg: '#09d261', fg: '#FFFFFF' }
   },
   {
     id: 'file-manager',
@@ -110,7 +110,7 @@ export const navigation: any[] = [
     translate: 'NAV.FILE_MANAGER',
     type: 'item',
     icon: 'folder',
-    link: '/apps/file-manager',
+    link: '/apps/file-manager'
   },
   {
     id: 'contacts',
@@ -118,7 +118,7 @@ export const navigation: any[] = [
     translate: 'NAV.CONTACTS',
     type: 'item',
     icon: 'account_box',
-    link: '/apps/contacts',
+    link: '/apps/contacts'
   },
   {
     id: 'to-do',
@@ -127,7 +127,7 @@ export const navigation: any[] = [
     type: 'item',
     icon: 'check_box',
     link: '/apps/todo',
-    badge: { label: '3', bg: '#FF6F00', fg: '#FFFFFF' },
+    badge: { label: '3', bg: '#FF6F00', fg: '#FFFFFF' }
   },
   {
     id: 'scrumboard',
@@ -135,7 +135,7 @@ export const navigation: any[] = [
     translate: 'NAV.SCRUMBOARD',
     type: 'item',
     icon: 'assessment',
-    link: '/apps/scrumboard',
+    link: '/apps/scrumboard'
   },
   {
     id: 'authentication',
@@ -149,64 +149,64 @@ export const navigation: any[] = [
         id: 'login-v2',
         label: 'Login v2',
         type: 'item',
-        link: '/pages/auth/login-2',
+        link: '/pages/auth/login-2'
       },
       {
         id: 'register',
         label: 'Register',
         type: 'item',
-        link: '/pages/auth/register',
+        link: '/pages/auth/register'
       },
       {
         id: 'register-v2',
         label: 'Register v2',
         type: 'item',
-        link: '/pages/auth/register-2',
+        link: '/pages/auth/register-2'
       },
       {
         id: 'forgot-password',
         label: 'Forgot Password',
         type: 'item',
-        link: '/pages/auth/forgot-password',
+        link: '/pages/auth/forgot-password'
       },
       {
         id: 'forgot-password-v2',
         label: 'Forgot Password v2',
         type: 'item',
-        link: '/pages/auth/forgot-password-2',
+        link: '/pages/auth/forgot-password-2'
       },
       {
         id: 'reset-password',
         label: 'Reset Password',
         type: 'item',
-        link: '/pages/auth/reset-password',
+        link: '/pages/auth/reset-password'
       },
       {
         id: 'reset-password-v2',
         label: 'Reset Password v2',
         type: 'item',
-        link: '/pages/auth/reset-password-2',
+        link: '/pages/auth/reset-password-2'
       },
       {
         id: 'lock-screen',
         label: 'Lock Screen',
         type: 'item',
-        link: '/pages/auth/lock',
+        link: '/pages/auth/lock'
       },
       {
         id: 'mail-confirmation',
         label: 'Mail Confirmation',
         type: 'item',
-        link: '/pages/auth/mail-confirm',
-      },
-    ],
+        link: '/pages/auth/mail-confirm'
+      }
+    ]
   },
   {
     id: 'coming-soon',
     label: 'Coming Soon',
     type: 'item',
     icon: 'alarm',
-    link: '/pages/coming-soon',
+    link: '/pages/coming-soon'
   },
   {
     id: 'errors',
@@ -218,15 +218,15 @@ export const navigation: any[] = [
         id: '404',
         label: '404',
         type: 'item',
-        link: '/pages/errors/error-404',
+        link: '/pages/errors/error-404'
       },
       {
         id: '500',
         label: '500',
         type: 'item',
-        link: '/pages/errors/error-500',
-      },
-    ],
+        link: '/pages/errors/error-500'
+      }
+    ]
   },
   {
     id: 'invoice',
@@ -238,22 +238,22 @@ export const navigation: any[] = [
         id: 'modern',
         label: 'Modern',
         type: 'item',
-        link: '/pages/invoices/modern',
+        link: '/pages/invoices/modern'
       },
       {
         id: 'compact',
         label: 'Compact',
         type: 'item',
-        link: '/pages/invoices/compact',
-      },
-    ],
+        link: '/pages/invoices/compact'
+      }
+    ]
   },
   {
     id: 'maintenance',
     label: 'Maintenance',
     type: 'item',
     icon: 'build',
-    link: '/pages/maintenance',
+    link: '/pages/maintenance'
   },
   {
     id: 'pricing',
@@ -265,28 +265,28 @@ export const navigation: any[] = [
         id: 'style-1',
         label: 'Style 1',
         type: 'item',
-        link: '/pages/pricing/style-1',
+        link: '/pages/pricing/style-1'
       },
       {
         id: 'style-2',
         label: 'Style 2',
         type: 'item',
-        link: '/pages/pricing/style-2',
+        link: '/pages/pricing/style-2'
       },
       {
         id: 'style-3',
         label: 'Style 3',
         type: 'item',
-        link: '/pages/pricing/style-3',
-      },
-    ],
+        link: '/pages/pricing/style-3'
+      }
+    ]
   },
   {
     id: 'profile',
     label: 'Profile',
     type: 'item',
     icon: 'person',
-    link: '/pages/profile',
+    link: '/pages/profile'
   },
   {
     id: 'search',
@@ -298,15 +298,15 @@ export const navigation: any[] = [
         id: 'search-classic',
         label: 'Classic',
         type: 'item',
-        link: '/pages/search/classic',
+        link: '/pages/search/classic'
       },
       {
         id: 'search-modern',
         label: 'Modern',
         type: 'item',
-        link: '/pages/search/modern',
-      },
-    ],
+        link: '/pages/search/modern'
+      }
+    ]
   },
   { id: 'faq', label: 'Faq', type: 'item', icon: 'help', link: '/pages/faq' },
   {
@@ -314,49 +314,49 @@ export const navigation: any[] = [
     label: 'Knowledge Base',
     type: 'item',
     icon: 'import_contacts',
-    link: '/pages/knowledge-base',
+    link: '/pages/knowledge-base'
   },
   {
     id: 'angular-material',
     label: 'Angular Material',
     type: 'item',
     icon: 'ballot',
-    link: '/ui/angular-material',
+    link: '/ui/angular-material'
   },
   {
     id: 'cards',
     label: 'Cards',
     type: 'item',
     icon: 'crop_portrait',
-    link: '/ui/cards',
+    link: '/ui/cards'
   },
   {
     id: 'forms',
     label: 'Forms',
     type: 'item',
     icon: 'web_asset',
-    link: '/ui/forms',
+    link: '/ui/forms'
   },
   {
     id: 'icons',
     label: 'Icons',
     type: 'item',
     icon: 'photo',
-    link: '/ui/icons',
+    link: '/ui/icons'
   },
   {
     id: 'typography',
     label: 'Typography',
     type: 'item',
     icon: 'text_fields',
-    link: '/ui/typography',
+    link: '/ui/typography'
   },
   {
     id: 'helper-classes',
     label: 'Helper Classes',
     type: 'item',
     icon: 'help',
-    link: '/ui/helper-classes',
+    link: '/ui/helper-classes'
   },
   {
     id: 'page-layouts',
@@ -374,75 +374,75 @@ export const navigation: any[] = [
             id: 'full-width-1',
             label: 'Full Width #1',
             type: 'item',
-            link: '/ui/page-layouts/carded/full-width-1',
+            link: '/ui/page-layouts/carded/full-width-1'
           },
           {
             id: 'full-width-2',
             label: 'Full Width #2',
             type: 'item',
-            link: '/ui/page-layouts/carded/full-width-2',
+            link: '/ui/page-layouts/carded/full-width-2'
           },
           {
             id: 'full-width-tabbed-1',
             label: 'Full Width Tabbed #1',
             type: 'item',
-            link: '/ui/page-layouts/carded/full-width-tabbed-1',
+            link: '/ui/page-layouts/carded/full-width-tabbed-1'
           },
           {
             id: 'full-width-tabbed-2',
             label: 'Full Width Tabbed #2',
             type: 'item',
-            link: '/ui/page-layouts/carded/full-width-tabbed-2',
+            link: '/ui/page-layouts/carded/full-width-tabbed-2'
           },
           {
             id: 'left-sidebar-1',
             label: 'Left Sidebar #1',
             type: 'item',
-            link: '/ui/page-layouts/carded/left-sidebar-1',
+            link: '/ui/page-layouts/carded/left-sidebar-1'
           },
           {
             id: 'left-sidebar-2',
             label: 'Left Sidebar #2',
             type: 'item',
-            link: '/ui/page-layouts/carded/left-sidebar-2',
+            link: '/ui/page-layouts/carded/left-sidebar-2'
           },
           {
             id: 'left-sidebar-tabbed-1',
             label: 'Left Sidebar Tabbed #1',
             type: 'item',
-            link: '/ui/page-layouts/carded/left-sidebar-tabbed-1',
+            link: '/ui/page-layouts/carded/left-sidebar-tabbed-1'
           },
           {
             id: 'left-sidebar-tabbed-2',
             label: 'Left Sidebar Tabbed #2',
             type: 'item',
-            link: '/ui/page-layouts/carded/left-sidebar-tabbed-2',
+            link: '/ui/page-layouts/carded/left-sidebar-tabbed-2'
           },
           {
             id: 'right-sidebar-1',
             label: 'Right Sidebar #1',
             type: 'item',
-            link: '/ui/page-layouts/carded/right-sidebar-1',
+            link: '/ui/page-layouts/carded/right-sidebar-1'
           },
           {
             id: 'right-sidebar-2',
             label: 'Right Sidebar #2',
             type: 'item',
-            link: '/ui/page-layouts/carded/right-sidebar-2',
+            link: '/ui/page-layouts/carded/right-sidebar-2'
           },
           {
             id: 'right-sidebar-tabbed-1',
             label: 'Right Sidebar Tabbed #1',
             type: 'item',
-            link: '/ui/page-layouts/carded/right-sidebar-tabbed-1',
+            link: '/ui/page-layouts/carded/right-sidebar-tabbed-1'
           },
           {
             id: 'right-sidebar-tabbed-2',
             label: 'Right Sidebar Tabbed #2',
             type: 'item',
-            link: '/ui/page-layouts/carded/right-sidebar-tabbed-2',
-          },
-        ],
+            link: '/ui/page-layouts/carded/right-sidebar-tabbed-2'
+          }
+        ]
       },
       {
         id: 'simple',
@@ -454,78 +454,78 @@ export const navigation: any[] = [
             id: 'full-width-1',
             label: 'Full Width #1',
             type: 'item',
-            link: '/ui/page-layouts/simple/full-width-1',
+            link: '/ui/page-layouts/simple/full-width-1'
           },
           {
             id: 'full-width-tabbed-1',
             label: 'Full Width Tabbed #1',
             type: 'item',
-            link: '/ui/page-layouts/simple/full-width-tabbed-1',
+            link: '/ui/page-layouts/simple/full-width-tabbed-1'
           },
           {
             id: 'left-sidebar-1',
             label: 'Left Sidebar #1',
             type: 'item',
-            link: '/ui/page-layouts/simple/left-sidebar-1',
+            link: '/ui/page-layouts/simple/left-sidebar-1'
           },
           {
             id: 'left-sidebar-2',
             label: 'Left Sidebar #2',
             type: 'item',
-            link: '/ui/page-layouts/simple/left-sidebar-2',
+            link: '/ui/page-layouts/simple/left-sidebar-2'
           },
           {
             id: 'left-sidebar-3',
             label: 'Left Sidebar #3',
             type: 'item',
-            link: '/ui/page-layouts/simple/left-sidebar-3',
+            link: '/ui/page-layouts/simple/left-sidebar-3'
           },
           {
             id: 'left-sidebar-4',
             label: 'Left Sidebar #4',
             type: 'item',
-            link: '/ui/page-layouts/simple/left-sidebar-4',
+            link: '/ui/page-layouts/simple/left-sidebar-4'
           },
           {
             id: 'right-sidebar-1',
             label: 'Right Sidebar #1',
             type: 'item',
-            link: '/ui/page-layouts/simple/right-sidebar-1',
+            link: '/ui/page-layouts/simple/right-sidebar-1'
           },
           {
             id: 'right-sidebar-2',
             label: 'Right Sidebar #2',
             type: 'item',
-            link: '/ui/page-layouts/simple/right-sidebar-2',
+            link: '/ui/page-layouts/simple/right-sidebar-2'
           },
           {
             id: 'right-sidebar-3',
             label: 'Right Sidebar #3',
             type: 'item',
-            link: '/ui/page-layouts/simple/right-sidebar-3',
+            link: '/ui/page-layouts/simple/right-sidebar-3'
           },
           {
             id: 'right-sidebar-4',
             label: 'Right Sidebar #4',
             type: 'item',
-            link: '/ui/page-layouts/simple/right-sidebar-4',
-          },
-        ],
+            link: '/ui/page-layouts/simple/right-sidebar-4'
+          }
+        ]
       },
       {
         id: 'blank',
         label: 'Blank',
         type: 'item',
-        link: '/ui/page-layouts/blank',
-      },
-    ],
+        link: '/ui/page-layouts/blank'
+      }
+    ]
   },
   {
     id: 'colors',
     label: 'Colors',
     type: 'item',
     icon: 'color_lens',
-    link: '/ui/colors',
+    link: '/ui/colors'
   },
   {
     id: 'changelog',
@@ -533,7 +533,7 @@ export const navigation: any[] = [
     type: 'item',
     icon: 'update',
     link: '/documentation/changelog',
-    badge: { label: '9.0.0', bg: '#EC0C8E', fg: '#FFFFFF' },
+    badge: { label: '9.0.0', bg: '#EC0C8E', fg: '#FFFFFF' }
   },
   {
     id: 'getting-started',
@@ -545,15 +545,15 @@ export const navigation: any[] = [
         id: 'introduction',
         label: 'Introduction',
         type: 'item',
-        link: '/documentation/getting-started/introduction',
+        link: '/documentation/getting-started/introduction'
       },
       {
         id: 'installation',
         label: 'Installation',
         type: 'item',
-        link: '/documentation/getting-started/installation',
-      },
-    ],
+        link: '/documentation/getting-started/installation'
+      }
+    ]
   },
   {
     id: 'working-with-fuse',
@@ -565,51 +565,51 @@ export const navigation: any[] = [
         id: 'server',
         label: 'Server',
         type: 'item',
-        link: '/documentation/working-with-fuse/server',
+        link: '/documentation/working-with-fuse/server'
       },
       {
         id: 'production',
         label: 'Production',
         type: 'item',
-        link: '/documentation/working-with-fuse/production',
+        link: '/documentation/working-with-fuse/production'
       },
       {
         id: 'directory-structure',
         label: 'Directory Structure',
         type: 'item',
-        link: '/documentation/working-with-fuse/directory-structure',
+        link: '/documentation/working-with-fuse/directory-structure'
       },
       {
         id: 'updating-fuse',
         label: 'Updating Fuse',
         type: 'item',
-        link: '/documentation/working-with-fuse/updating-fuse',
+        link: '/documentation/working-with-fuse/updating-fuse'
       },
       {
         id: 'multi-language',
         label: 'Multi Language',
         type: 'item',
-        link: '/documentation/working-with-fuse/multi-language',
+        link: '/documentation/working-with-fuse/multi-language'
       },
       {
         id: 'material-theming',
         label: 'Material Theming',
         type: 'item',
-        link: '/documentation/working-with-fuse/material-theming',
+        link: '/documentation/working-with-fuse/material-theming'
       },
       {
         id: 'theme-layouts',
         label: 'Theme Layouts',
         type: 'item',
-        link: '/documentation/working-with-fuse/theme-layouts',
+        link: '/documentation/working-with-fuse/theme-layouts'
       },
       {
         id: 'page-layouts',
         label: 'Page Layouts',
         type: 'item',
-        link: '/documentation/working-with-fuse/page-layouts',
-      },
-    ],
+        link: '/documentation/working-with-fuse/page-layouts'
+      }
+    ]
   },
   {
     id: 'components',
@@ -621,57 +621,57 @@ export const navigation: any[] = [
         id: 'countdown',
         label: 'Countdown',
         type: 'item',
-        link: '/documentation/components/countdown',
+        link: '/documentation/components/countdown'
       },
       {
         id: 'highlight',
         label: 'Highlight',
         type: 'item',
-        link: '/documentation/components/highlight',
+        link: '/documentation/components/highlight'
       },
       {
         id: 'material-color-picker',
         label: 'Material Color Picker',
         type: 'item',
-        link: '/documentation/components/material-color-picker',
+        link: '/documentation/components/material-color-picker'
       },
       {
         id: 'navigation',
         label: 'Navigation',
         type: 'item',
-        link: '/documentation/components/navigation',
+        link: '/documentation/components/navigation'
       },
       {
         id: 'progress-bar',
         label: 'Progress Bar',
         type: 'item',
-        link: '/documentation/components/progress-bar',
+        link: '/documentation/components/progress-bar'
       },
       {
         id: 'search-bar',
         label: 'Search Bar',
         type: 'item',
-        link: '/documentation/components/search-bar',
+        link: '/documentation/components/search-bar'
       },
       {
         id: 'sidebar',
         label: 'Sidebar',
         type: 'item',
-        link: '/documentation/components/sidebar',
+        link: '/documentation/components/sidebar'
       },
       {
         id: 'shortcuts',
         label: 'Shortcuts',
         type: 'item',
-        link: '/documentation/components/shortcuts',
+        link: '/documentation/components/shortcuts'
       },
       {
         id: 'widget',
         label: 'Widget',
         type: 'item',
-        link: '/documentation/components/widget',
-      },
-    ],
+        link: '/documentation/components/widget'
+      }
+    ]
   },
   {
     id: '3rd-party-components',
@@ -688,18 +688,17 @@ export const navigation: any[] = [
             id: 'ngxdatatable',
             label: 'ngx-datatable',
             type: 'item',
-            link:
-              '/documentation/components-third-party/datatables/ngx-datatable',
-          },
-        ],
+            link: '/documentation/components-third-party/datatables/ngx-datatable'
+          }
+        ]
       },
       {
         id: 'google-maps',
         label: 'Google Maps',
         type: 'item',
-        link: '/documentation/components-third-party/google-maps',
-      },
-    ],
+        link: '/documentation/components-third-party/google-maps'
+      }
+    ]
   },
   {
     id: 'directives',
@@ -711,27 +710,27 @@ export const navigation: any[] = [
         id: 'fuse-if-on-dom',
         label: 'fuseIfOnDom',
         type: 'item',
-        link: '/documentation/directives/fuse-if-on-dom',
+        link: '/documentation/directives/fuse-if-on-dom'
       },
       {
         id: 'fuse-inner-scroll',
         label: 'fuseInnerScroll',
         type: 'item',
-        link: '/documentation/directives/fuse-inner-scroll',
+        link: '/documentation/directives/fuse-inner-scroll'
       },
       {
         id: 'fuse-mat-sidenav',
         label: 'fuseMatSidenav',
         type: 'item',
-        link: '/documentation/directives/fuse-mat-sidenav',
+        link: '/documentation/directives/fuse-mat-sidenav'
       },
       {
         id: 'fuse-perfect-scrollbar',
         label: 'fusePerfectScrollbar',
         type: 'item',
-        link: '/documentation/directives/fuse-perfect-scrollbar',
-      },
-    ],
+        link: '/documentation/directives/fuse-perfect-scrollbar'
+      }
+    ]
   },
   {
     id: 'services',
@@ -743,14 +742,14 @@ export const navigation: any[] = [
         id: 'fuse-config',
         label: 'Fuse Config',
         type: 'item',
-        link: '/documentation/services/fuse-config',
+        link: '/documentation/services/fuse-config'
       },
       {
         id: 'fuse-splash-screen',
         label: 'Fuse Splash Screen',
         type: 'item',
-        link: '/documentation/services/fuse-splash-screen',
-      },
-    ],
-  },
+        link: '/documentation/services/fuse-splash-screen'
+      }
+    ]
+  }
 ];

@@ -5,13 +5,10 @@ import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CargosModule } from '@simples/api-auxiliares';
-import { TestesModule } from '@simples/api-cruds';
+import { MenuModule, ProfileModule } from '@simples/api-cruds';
 import { ApiDatabaseModule } from '@simples/api-database';
 import { PessoasModule, UsuariosModule } from '@simples/api-pessoas';
-import {
-  utilities as nestWinstonModuleUtilities,
-  WinstonModule,
-} from 'nest-winston';
+import { utilities as nestWinstonModuleUtilities, WinstonModule } from 'nest-winston';
 import * as winston from 'winston';
 
 import { AppController } from './app.controller';
@@ -24,65 +21,54 @@ import { DatabaseConfig } from './database.config';
     WinstonModule.forRoot({
       transports: [
         new winston.transports.Console({
-          format: winston.format.combine(
-            winston.format.timestamp(),
-            nestWinstonModuleUtilities.format.nestLike()
-          ),
-          handleExceptions: true,
+          format: winston.format.combine(winston.format.timestamp(), nestWinstonModuleUtilities.format.nestLike()),
+          handleExceptions: true
         }),
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         new (winston.transports as any).DailyRotateFile({
-          format: winston.format.combine(
-            winston.format.timestamp(),
-            winston.format.logstash()
-          ),
+          format: winston.format.combine(winston.format.timestamp(), winston.format.logstash()),
           filename: 'logs/info-%DATE%.log',
           datePattern: 'YYYY-MM-DD',
           maxFiles: '1d',
-          level: 'info',
+          level: 'info'
         }),
         new winston.transports.DailyRotateFile({
           filename: 'logs/error-%DATE%.log',
           datePattern: 'YYYY-MM-DD',
           maxFiles: '1d',
           level: 'error',
-          format: winston.format.combine(
-            winston.format.timestamp(),
-            winston.format.logstash()
-          ),
-        }),
+          format: winston.format.combine(winston.format.timestamp(), winston.format.logstash())
+        })
       ],
       exceptionHandlers: [
         new winston.transports.DailyRotateFile({
           filename: 'logs/exception-%DATE%.log',
           datePattern: 'YYYY-MM-DD',
           maxFiles: '1d',
-          format: winston.format.combine(
-            winston.format.timestamp(),
-            winston.format.logstash()
-          ),
-        }),
-      ],
+          format: winston.format.combine(winston.format.timestamp(), winston.format.logstash())
+        })
+      ]
     }),
 
     ConfigModule.forRoot({
       isGlobal: true,
-      load: [config],
+      load: [config]
     }),
 
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
-      useClass: DatabaseConfig,
+      useClass: DatabaseConfig
     }),
 
     ApiDatabaseModule,
-    PessoasModule,
-    UsuariosModule,
+    ProfileModule,
+    MenuModule,
     CargosModule,
-    TestesModule,
+    PessoasModule,
+    UsuariosModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService]
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer): void {

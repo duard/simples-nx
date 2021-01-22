@@ -3,13 +3,13 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { TypeOrmCrudService } from '@nestjsx/crud-typeorm';
 import { Repository } from 'typeorm';
 
-import { Menu } from './menu.entity';
+import { MenusEntity } from './menu.entity';
 
 @Injectable()
-export class MenuService extends TypeOrmCrudService<Menu> {
+export class MenuService extends TypeOrmCrudService<MenusEntity> {
   constructor(
-    @InjectRepository(Menu)
-    private readonly menuRepository: Repository<Menu>,
+    @InjectRepository(MenusEntity)
+    private readonly menuRepository: Repository<MenusEntity>
   ) {
     super(menuRepository);
   }

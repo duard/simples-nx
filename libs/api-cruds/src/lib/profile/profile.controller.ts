@@ -1,13 +1,13 @@
 import { Controller, Query } from '@nestjs/common';
 import { Crud, CrudController, CrudRequest, Override, ParsedBody, ParsedRequest } from '@nestjsx/crud';
+import { parseSearch } from '@simples/api-shared';
 
-import { Profile } from './profile.entity';
+import { ProfileEntity } from './profile.entity';
 import { ProfileService } from './profile.service';
-import { parseSearch } from '@meto/shared-things';
 
 @Crud({
   model: {
-    type: Profile,
+    type: ProfileEntity
   },
   query: {
     alwaysPaginate: true,
@@ -15,41 +15,34 @@ import { parseSearch } from '@meto/shared-things';
     sort: [{ field: 'id', order: 'DESC' }],
     join: {
       menus: {
-        allow: [],
-      },
-    },
-  },
+        allow: []
+      }
+    }
+  }
 })
 @Controller('profiles')
-export class ProfileController implements CrudController<Profile> {
+export class ProfileController implements CrudController<ProfileEntity> {
   constructor(public service: ProfileService) {}
 
-  get base(): CrudController<Profile> {
+  get base(): CrudController<ProfileEntity> {
     return this;
   }
 
   @Override()
-  getMany(
-    @ParsedRequest() req: CrudRequest,
-    @Query() query: { search: string; searchBy: string; orderBy: string; orderType: any }
-  ) {
-    const { search, searchBy, orderBy, orderType } = query;
+  getMany(@ParsedRequest() req: CrudRequest, @Query() query: { search: string; searchBy: string }) {
+    req.parsed.offset = req.parsed.limit * req.parsed.offset;
 
-    if (orderType) {
-      const order: any = orderType.toUpperCase();
-      req.options.query.sort = [{ order, field: orderBy }];
-    }
+    const { search, searchBy } = query;
 
     if (search) {
-      const column = searchBy ? searchBy : 'name';
-      req.parsed.search.$and = parseSearch(search, column);
+      req.parsed.search.$and = parseSearch(search, searchBy);
     }
 
     return this.base.getManyBase(req);
   }
 
   @Override()
-  createOneBase(@ParsedRequest() req: CrudRequest, @ParsedBody() body: Profile) {
+  createOneBase(@ParsedRequest() req: CrudRequest, @ParsedBody() body: ProfileEntity) {
     console.log('body', body);
     return this.base.createOneBase(req, body);
   }
