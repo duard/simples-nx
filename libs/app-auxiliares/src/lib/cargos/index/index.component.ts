@@ -6,11 +6,12 @@ import { Observable } from 'rxjs';
 import { CargosCollectionService } from '../cargos.service';
 import { FormComponent } from '../form/form.component';
 import { Configs } from './configs';
+
 @Component({
   selector: 'simples-index',
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class IndexComponent extends IndexDlgApiComponent implements OnInit, AfterViewInit {
   titulo = 'Cargos';
@@ -29,7 +30,7 @@ export class IndexComponent extends IndexDlgApiComponent implements OnInit, Afte
     // 'deleted_at',
     // 'is_deleted',
     // 'is_active',
-    'description',
+    'description'
   ];
 
   constructor(private injector: Injector, @Inject('env') public env, private dataService: CargosCollectionService) {
@@ -68,7 +69,7 @@ export class IndexComponent extends IndexDlgApiComponent implements OnInit, Afte
     this.dlgConfig.data = {
       id: this.selectedId,
       payload: registro,
-      operation: this.operation,
+      operation: this.operation
     };
 
     const dialogRef = this.dialog.open(FormComponent, this.dlgConfig);
