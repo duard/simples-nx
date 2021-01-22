@@ -1,16 +1,16 @@
 import { Base } from './base-interface';
 
 export interface Menu extends Base {
-  index: number;
+  index?: number;
 
   title: string;
-  icon: string;
-  link: string;
-  type: string;
+  icon?: string;
+  link?: string;
+  type?: string;
 
-  menus: Menu[];
-  parentId: number;
-  profiles: any[];
+  menus?: Menu[];
+  parentId?: number;
+  profiles?: any[];
 
   createdAt?: Date;
   updatedAt?: Date;

@@ -1,13 +1,5 @@
 import { EntityMetadataMap, EntityDataModuleConfig, DefaultDataServiceConfig } from '@ngrx/data';
 
-export interface basicPaginationReponse {
-  count: number;
-  data: [];
-  page: number;
-  pageCount: number;
-  total: number;
-}
-
 const moduleEntityMetadata: EntityMetadataMap = {
   Module: {
     additionalCollectionState: {
@@ -35,8 +27,15 @@ const entityMetadata: EntityMetadataMap = {
       count: null,
       page: null,
       pageCount: null,
-      total: null,
-      foo: 'teste 12'
+      total: null
+    }
+  },
+  Menus: {
+    additionalCollectionState: {
+      count: null,
+      page: null,
+      pageCount: null,
+      total: null
     }
   },
   Cargos: {
@@ -44,13 +43,12 @@ const entityMetadata: EntityMetadataMap = {
       count: null,
       page: null,
       pageCount: null,
-      total: null,
-      foo: 'teste 12'
+      total: null
     }
   }
 };
 
-const pluralNames = { Cargos: 'Cargos', Profiles: 'Profiles' };
+const pluralNames = { Cargos: 'Cargos', Profiles: 'Profiles', Menus: 'Menus' };
 
 export const entityConfig: EntityDataModuleConfig = {
   entityMetadata,

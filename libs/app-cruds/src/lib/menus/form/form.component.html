@@ -1,0 +1,81 @@
+<div class="wrapper">
+  <div class="header">
+    <app-toolbar-crud-dlg
+      [title]="titulo"
+      [operation]="operation"
+      [form]="formCRUD"
+      (save)="onSave($event)"
+      (cancel)="dlgRef.close()"
+      (delete)="onDelete()"
+      [deleteButton]="true"
+    ></app-toolbar-crud-dlg>
+  </div>
+  <div class="content">
+    <form [formGroup]="formCRUD" errorTailor (keyup.escape)="dlgRef.close()" (keydown.control.delete)="onDelete()">
+      <div fxLayout="column" fxLayoutGap="10px">
+        <div class="child-1">
+          <mat-form-field class="full-width">
+            <mat-label>Título</mat-label>
+            <input
+              type="text"
+              #inputTitle
+              formControlName="title"
+              matInput
+              placeholder="Título"
+              cdkFocusRegionstart
+              [controlErrorAnchor]="titleError"
+            />
+            <mat-error>
+              <ng-template controlErrorAnchor #titleError="controlErrorAnchor"></ng-template>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="child-2">
+          <mat-form-field class="full-width">
+            <mat-label>Ícone</mat-label>
+            <input
+              type="text"
+              #inputIcon
+              formControlName="icon"
+              matInput
+              placeholder="Ícone"
+              [controlErrorAnchor]="iconError"
+            />
+            <mat-error>
+              <ng-template controlErrorAnchor #iconError="controlErrorAnchor"></ng-template>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="child-2">
+          <mat-form-field class="full-width">
+            <mat-label>Link</mat-label>
+            <input
+              type="text"
+              #inputIcon
+              formControlName="link"
+              matInput
+              placeholder="Link"
+              [controlErrorAnchor]="linkError"
+            />
+            <mat-error>
+              <ng-template controlErrorAnchor #linkError="controlErrorAnchor"></ng-template>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <div class="child-99">
+          <mat-checkbox formControlName="isActive">Ativo</mat-checkbox>
+        </div>
+      </div>
+    </form>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="footer-base" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+    <button mat-button color="warn" (click)="dlgRef.close()">Cancelar</button>
+    <button mat-raised-button color="primary" (click)="onSave()">Salvar</button>
+  </div>
+</div>

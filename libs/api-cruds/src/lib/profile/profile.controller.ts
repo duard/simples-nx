@@ -40,10 +40,4 @@ export class ProfileController implements CrudController<ProfileEntity> {
 
     return this.base.getManyBase(req);
   }
-
-  @Override()
-  createOneBase(@ParsedRequest() req: CrudRequest, @ParsedBody() body: ProfileEntity) {
-    console.log('body', body);
-    return this.base.createOneBase(req, body);
-  }
 }

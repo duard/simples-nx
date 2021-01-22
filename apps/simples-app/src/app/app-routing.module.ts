@@ -22,6 +22,11 @@ const routes: Routes = [
   },
 
   {
+    path: 'seguranca/menus',
+    loadChildren: () => import('@simples/app-cruds').then(m => m.MenusModule)
+  },
+
+  {
     path: '',
     loadChildren: () => import('@simples/pages').then(m => m.NxModule)
   }
