@@ -1,11 +1,8 @@
 
-Exemplo de como fica o código de um CRUD
-
-[CRUD](https://github.com/duard/simples-nx/blob/master/libs/app-cruds/src/lib/menus/index/index.component.ts)
-![Screenshot CRUD Básico](screenshot-cargos.jpeg)
-
 # Projeto BASE
 
+[Exemplo de como fica o código de um CRUD](https://github.com/duard/simples-nx/blob/master/libs/app-cruds/src/lib/menus/index/index.component.ts)
+![Screenshot CRUD Básico](screenshot-cargos.jpeg)
 
 Atualizar o projeto inteiro, sempre mantenha ele atualizado, não seja um goiaba que deixa as coisas em 1998.
 
