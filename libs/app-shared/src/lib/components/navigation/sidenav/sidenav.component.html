@@ -1,5 +1,4 @@
-
-<div class="wrapper">
+<div class="wrapper" #sidenav1>
   <div class="header">
     <mat-toolbar class="mat-elevation-z9" color="primary">
       <button mat-icon-button (click)="onMenuClick()">
@@ -8,7 +7,7 @@
       <h1 class="example-app-name">Nested Menus</h1>
     </mat-toolbar>
   </div>
-<!--
+  <!--
   <div class="user_menu">
     <mat-nav-list>
       <a mat-list-item>
@@ -20,12 +19,18 @@
   </div> -->
 
   <div class="content">
-    <perfect-scrollbar >
-
-      <ng-material-multilevel-menu [configuration]='config' [items]='menuItens'>
+    <perfect-scrollbar>
+      <ng-material-multilevel-menu
+        #sidenav2
+        [configuration]="config"
+        [items]="menuItens"
+        (selectedItem)="selectedItem($event)"
+        (menuIsReady)="menuIsReady($event)"
+        (selectedLabel)="selectedLabel($event)"
+      >
       </ng-material-multilevel-menu>
     </perfect-scrollbar>
-    </div>
+  </div>
   <div class="footer">
     <mat-toolbar class="mat-elevation-z4" color="primary">
       <span class="fill-space"></span>

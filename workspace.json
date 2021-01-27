@@ -31,10 +31,7 @@
             },
             "extractCss": true,
             "scripts": [],
-            "allowedCommonJsDependencies": ["hammerjs"],
-            "customWebpackConfig": {
-              "path": "webpack.config.js"
-            }
+            "allowedCommonJsDependencies": ["hammerjs"]
           },
           "configurations": {
             "production": {

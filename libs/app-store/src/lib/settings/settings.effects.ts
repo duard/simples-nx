@@ -7,16 +7,10 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { select, State, Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 
-import {
-  distinctUntilChanged,
-  filter,
-  map,
-  mapTo,
-  tap,
-  withLatestFrom,
-} from 'rxjs/operators';
+import { distinctUntilChanged, filter, map, mapTo, tap, withLatestFrom } from 'rxjs/operators';
 
 import {
+  actionPushMenu,
   actionSettingsChangeAnimationsElements,
   actionSettingsChangeAnimationsPage,
   actionSettingsChangeAnimationsPageDisabled,
@@ -25,14 +19,14 @@ import {
   actionSettingsChangeLanguage,
   actionSettingsChangeSideNav,
   actionSettingsChangeStickyHeader,
-  actionSettingsChangeTheme,
+  actionSettingsChangeTheme
 } from './settings.actions';
 import {
   selectEffectiveTheme,
   selectElementsAnimations,
   selectPageAnimations,
   selectSettingsLanguage,
-  selectSettingsSideNav,
+  selectSettingsSideNav
 } from './settings.selectors';
 import { of, interval } from 'rxjs';
 
@@ -47,25 +41,35 @@ export class SettingsEffects {
     private actions$: Actions,
     private store: Store<SettingsState>,
     private router: Router,
-    private overlayContainer: OverlayContainer,
-
-
+    private overlayContainer: OverlayContainer
   ) {}
 
   changeHour = createEffect(() =>
     interval(60_000).pipe(
       mapTo(new Date().getHours()),
       distinctUntilChanged(),
-      map((hour) => actionSettingsChangeHour({ hour }))
+      map(hour => actionSettingsChangeHour({ hour }))
     )
   );
   changeLeftSideNav$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType(actionSettingsChangeSideNav),
-        tap((action) =>
+        tap(action =>
           // this.analytics.trackPageView(action.payload.routerState.url)
           console.log('=> changeLeftSideNav$', action.sideNav)
+        )
+      ),
+    { dispatch: false }
+  );
+
+  pushMenu$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(actionPushMenu),
+        tap(action =>
+          // this.analytics.trackPageView(action.payload.routerState.url)
+          console.log('=> actionPushMenu$', typeof action.menus)
         )
       ),
     { dispatch: false }

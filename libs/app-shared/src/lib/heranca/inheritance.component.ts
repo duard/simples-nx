@@ -12,17 +12,19 @@ import {
   OnChanges,
   OnDestroy,
   OnInit,
-  SimpleChanges,
+  SimpleChanges
 } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Logger } from '@simples/app-core';
-import { Observable, Subject, Subscription } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { MultilevelMenuService } from 'ng-material-multilevel-menu';
+import { Subject, Subscription } from 'rxjs';
+
+import { LoadingService } from '../components/loading/loading.service';
 
 @Component({
   selector: 'inheritance',
   template: 'Inheritance: See in logs',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BaseComponent
   implements
@@ -39,20 +41,22 @@ export class BaseComponent
   protected cdRef: ChangeDetectorRef;
   protected router: Router;
   protected subscription: Subscription;
+  protected multilevelMenuService: MultilevelMenuService;
+  protected activeRoute: ActivatedRoute;
+  protected loadingService: LoadingService;
 
   subscriptions: Subscription[] = [];
   isDev = false;
   log = new Logger();
   order = 1;
 
-  constructor(
-    protected injectorObj?: Injector,
-    @Inject('environment') env?: any
-  ) {
+  constructor(protected injectorObj?: Injector, @Inject('environment') env?: any) {
     this.isDev = !env.production;
     this.cdRef = this.injectorObj.get(ChangeDetectorRef);
     this.router = this.injectorObj.get(Router);
-
+    this.activeRoute = this.injectorObj.get(ActivatedRoute);
+    this.loadingService = this.injectorObj.get(LoadingService);
+    this.multilevelMenuService = this.injectorObj.get(MultilevelMenuService);
     // console.log('I am from constructor()!! and my order::::' + this.order);
     this.order++;
   }
@@ -102,7 +106,7 @@ export class BaseComponent
     this.isAlive$.complete();
 
     if (this.subscriptions) {
-      this.subscriptions.forEach((s) => s.unsubscribe());
+      this.subscriptions.forEach(s => s.unsubscribe());
     }
 
     if (this.subscription) {

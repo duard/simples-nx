@@ -33,7 +33,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { initialNavigation: 'enabled' })],
+  imports: [RouterModule.forRoot(routes, { initialNavigation: 'enabled', paramsInheritanceStrategy: 'always' })],
 
   exports: [RouterModule]
 })

@@ -4,17 +4,9 @@ body {
   min-height: 100vh;
 }
 
-
-mat-sidenav{
-  border-right:0px;
-  box-shadow:  2px 0 6px rgba(0,0,0,0.30);
-}
-
-
-body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+mat-sidenav {
+  border-right: 0px;
+  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.3);
 }
 
 .container {
@@ -35,12 +27,11 @@ body {
 
   // background-color:rgb(216, 216, 216);
   // margin-left: 12px;
-
 }
 
-mat-sidenav{
-  border-right:0px;
-  box-shadow:  2px 0 6px rgba(0,0,0,0.30);
+mat-sidenav {
+  border-right: 0px;
+  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.3);
 }
 
 .floating {
@@ -50,6 +41,4 @@ mat-sidenav{
   top: 0px;
   background-color: grey;
   z-index: 200000;
-
 }
-

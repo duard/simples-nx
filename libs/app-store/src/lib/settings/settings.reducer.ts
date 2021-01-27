@@ -1,6 +1,7 @@
 import { Action, createReducer, on } from '@ngrx/store';
 
 import {
+  actionPushMenu,
   actionSettingsChangeAnimationsElements,
   actionSettingsChangeAnimationsPage,
   actionSettingsChangeAnimationsPageDisabled,
@@ -9,7 +10,7 @@ import {
   actionSettingsChangeLanguage,
   actionSettingsChangeSideNav,
   actionSettingsChangeStickyHeader,
-  actionSettingsChangeTheme,
+  actionSettingsChangeTheme
 } from './settings.actions';
 
 export const NIGHT_MODE_THEME = 'BLACK-THEME';
@@ -27,6 +28,7 @@ export interface SettingsState {
   pageAnimationsDisabled: boolean;
   elementsAnimations: boolean;
   hour: number;
+  menus: any;
 }
 
 export const initialState: SettingsState = {
@@ -40,6 +42,7 @@ export const initialState: SettingsState = {
   pageAnimationsDisabled: false,
   elementsAnimations: true,
   hour: 0,
+  menus: null
 };
 
 const reducer = createReducer(
@@ -55,14 +58,11 @@ const reducer = createReducer(
     // actionSettingsChangeSideNav,
     (state, action) => ({ ...state, ...action })
   ),
-  on(
-    actionSettingsChangeAnimationsPageDisabled,
-    (state, { pageAnimationsDisabled }) => ({
-      ...state,
-      pageAnimationsDisabled,
-      pageAnimations: false,
-    })
-  ),
+  on(actionSettingsChangeAnimationsPageDisabled, (state, { pageAnimationsDisabled }) => ({
+    ...state,
+    pageAnimationsDisabled,
+    pageAnimations: false
+  })),
   // on(actionSettingsChangeSideNav, (state, { sideNav }) => ({
   //   ...state,
   //   sideNav: sideNav,
@@ -71,11 +71,20 @@ const reducer = createReducer(
     ...state,
     sideNav: sideNav
   })),
+  // on(actionPushMenu, (state, { menus}) => ({
+  //   ...state,
+  //   menus: menus
+  // })),
+
+  on(actionPushMenu, (state, { menus }) => {
+    console.log('reducer', typeof menus);
+    //  menus.map(item => Object.assign({}, item, { selected: false }));
+    //     state.menus = newData;
+
+    return { ...state, menus };
+  })
 );
 
-export function settingsReducer(
-  state: SettingsState | undefined,
-  action: Action
-) {
+export function settingsReducer(state: SettingsState | undefined, action: Action) {
   return reducer(state, action);
 }

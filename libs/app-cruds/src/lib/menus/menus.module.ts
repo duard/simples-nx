@@ -13,8 +13,9 @@ const routes: Routes = [
   {
     path: '',
     component: MenusComponent,
+    data: { msg: 'page msg' },
     children: [
-      { path: 'index', component: IndexComponent, data: { page: 'Todos Menus', tela: 'Menus' } },
+      { path: 'index', component: IndexComponent, data: { page: 'Todos Menus', tela: 'Menus', menu: 'menus' } },
       { path: ':id', component: FormComponent }
     ]
   }

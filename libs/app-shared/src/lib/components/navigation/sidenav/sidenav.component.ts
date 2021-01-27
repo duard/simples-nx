@@ -1,18 +1,23 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
-import { ExpandedLTR, ExpandedRTL, MultilevelMenuService, SlideInOut } from 'ng-material-multilevel-menu';
+import { ActivatedRoute, Data, Router } from '@angular/router';
+import { SettingsFacade } from '@simples/app-store';
+import {
+  ExpandedLTR,
+  ExpandedRTL,
+  MultilevelMenuService,
+  MultilevelNodes,
+  SlideInOut
+} from 'ng-material-multilevel-menu';
 
 @Component({
   selector: 'simples-sidenav',
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.scss'],
-  animations: [
-    SlideInOut,
-    ExpandedLTR,
-    ExpandedRTL,
-  ]
+  animations: [SlideInOut, ExpandedLTR, ExpandedRTL]
 })
 export class SidenavComponent implements OnInit {
+  menuWithID: MultilevelNodes[] = null;
+
   @Output() sideNavClosed = new EventEmitter();
 
   @Input() menuItens: any;
@@ -28,21 +33,25 @@ export class SidenavComponent implements OnInit {
     interfaceWithRoute: true,
     highlightOnSelect: true,
 
-
     collapseOnSelect: true,
-    useDividers: false,
-    rtlLayout: false,
-
-
-
+    useDividers: true,
+    rtlLayout: false
   };
 
   constructor(
     private router: Router,
-    private multilevelMenuService: MultilevelMenuService
+    private activeRoute: ActivatedRoute,
+    private multilevelMenuService: MultilevelMenuService,
+    private settingsFacade: SettingsFacade
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.activeRoute.data.subscribe(data => {
+      console.log('bongado ====>', data.menu);
+      this.multilevelMenuService.selectMenuByID(data.menu);
+    });
+    this.multilevelMenuService.selectMenuByID('menus');
+  }
 
   onMenuClick() {
     this.sideNavClosed.emit();
@@ -53,7 +62,25 @@ export class SidenavComponent implements OnInit {
   }
 
   selectedItem(menu) {
-    console.log(menu);
+    console.log('item', menu);
+    this.multilevelMenuService.selectMenuByID(menu.id);
+  }
+
+  selectedLabel(menu) {
+    console.log('label', menu.id);
+  }
+
+  selectMenuID(MenuID) {
+    this.multilevelMenuService.selectMenuByID(MenuID);
+  }
+
+  menuIsReady(menus: MultilevelNodes[]) {
+    this.menuWithID = menus;
+    console.log('estou pronto', typeof this.menuWithID);
+
+    let entries = [this.menuWithID];
+
+    // this.settingsFacade.pushMenu(this.menuWithID);
   }
 
   onAbout() {
@@ -61,9 +88,29 @@ export class SidenavComponent implements OnInit {
     this.sideNavClosed.emit(); // Emit event to parent component so it can tell sidenav to close
   }
 
-  fakeArray(length: number): Array<any> {
-    if (length >= 0) {
-      return new Array(length);
+  walkRecursive(walkable, walkFunc) {
+    if (typeof walkable === 'object') {
+      let v;
+      if (walkable instanceof Array) {
+        for (let i = 0, l = walkable.length; i < l; i++) {
+          v = walkable[i];
+          if (typeof v === 'object') {
+            this.walkRecursive(v, walkFunc);
+          } else {
+            walkFunc(v, i, walkable);
+          }
+        }
+      } else {
+        for (let i in walkable) {
+          v = walkable[i];
+          if (typeof v === 'object') {
+            this.walkRecursive(v, walkFunc);
+          } else {
+            walkFunc(v, i, walkable);
+          }
+        }
+      }
     }
+    return;
   }
 }

@@ -2,15 +2,9 @@ import { createAction, props } from '@ngrx/store';
 
 import { Language } from './settings.reducer';
 
-export const actionSettingsChangeLanguage = createAction(
-  '[Settings] Change Language',
-  props<{ language: Language }>()
-);
+export const actionSettingsChangeLanguage = createAction('[Settings] Change Language', props<{ language: Language }>());
 
-export const actionSettingsChangeTheme = createAction(
-  '[Settings] Change Theme',
-  props<{ theme: string }>()
-);
+export const actionSettingsChangeTheme = createAction('[Settings] Change Theme', props<{ theme: string }>());
 export const actionSettingsChangeAutoNightMode = createAction(
   '[Settings] Change Auto Night Mode',
   props<{ autoNightMode: boolean }>()
@@ -35,12 +29,8 @@ export const actionSettingsChangeAnimationsElements = createAction(
   '[Settings] Change Animations Elements',
   props<{ elementsAnimations: boolean }>()
 );
-export const actionSettingsChangeHour = createAction(
-  '[Settings] Change Hours',
-  props<{ hour: number }>()
-);
+export const actionSettingsChangeHour = createAction('[Settings] Change Hours', props<{ hour: number }>());
 
-export const actionSettingsChangeSideNav = createAction(
-  '[Settings] Change SideNav',
-  props<{ sideNav: boolean }>()
-);
+export const actionSettingsChangeSideNav = createAction('[Settings] Change SideNav', props<{ sideNav: boolean }>());
+
+export const actionPushMenu = createAction('[Settings] Push Menu', props<{ menus: any }>());

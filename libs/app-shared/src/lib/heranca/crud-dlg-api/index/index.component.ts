@@ -1,19 +1,10 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  Inject,
-  Injector,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, Injector, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
-import { ActivatedRoute, Router } from '@angular/router';
 import { DialogService } from '@ngneat/dialog';
+import { SidenavComponent } from '../../../components/navigation/sidenav/sidenav.component';
 
-import { LoadingService } from '../../../components/loading/loading.service';
 import { ToolbarCrudFooterComponent } from '../../../components/toolbar-crud-footer/toolbar-crud-footer.component';
 import { ToolbarCrudSimplesComponent } from '../../../components/toolbar-crud-simples/toolbar-crud-simples.component';
 import { BaseComponent } from '../../inheritance.component';
@@ -23,14 +14,10 @@ import { BaseComponent } from '../../inheritance.component';
   template: 'Inheritance: See in logs',
 
   styleUrls: ['./index.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class IndexDlgApiComponent extends BaseComponent implements OnInit {
-  protected cdRef: ChangeDetectorRef;
-  protected router: Router;
-  protected activeRoute: ActivatedRoute;
   protected dialog: DialogService;
-  protected loadingService: LoadingService;
 
   operation = 'index';
   params: any;
@@ -49,7 +36,7 @@ export class IndexDlgApiComponent extends BaseComponent implements OnInit {
     height: '240',
     width: '420px',
     backdrop: true,
-    data: null,
+    data: null
   };
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
@@ -57,19 +44,27 @@ export class IndexDlgApiComponent extends BaseComponent implements OnInit {
   @ViewChild(MatTable) table: MatTable<any>;
   @ViewChild(ToolbarCrudSimplesComponent) tbCrud: any;
   @ViewChild(ToolbarCrudFooterComponent) tbFooter: any;
+  @ViewChild(SidenavComponent) sidenav1: any;
+  @ViewChild(SidenavComponent) sidenav2: any;
+
+  @ViewChild('sidenav1') sidenav1Component: SidenavComponent;
+  @ViewChild('sidenav2') sidenav2Component: SidenavComponent;
 
   constructor(injector: Injector, @Inject('environment') env?: any) {
     super(injector, env);
 
     this.dialog = this.injectorObj.get(DialogService);
-    this.loadingService = this.injectorObj.get(LoadingService);
-    this.activeRoute = this.injectorObj.get(ActivatedRoute);
 
     this.activeRoute.queryParams.subscribe((params: any) => {
       if (params) {
         this.params = {};
         this.params = { ...this.params, ...params };
       }
+    });
+
+    this.activeRoute.data.subscribe(data => {
+      console.log('====>', data.menu);
+      this.multilevelMenuService.selectMenuByID(data.menu);
     });
 
     if (!this.isDev) {
@@ -103,6 +98,9 @@ export class IndexDlgApiComponent extends BaseComponent implements OnInit {
   ngAfterViewInit(): void {
     // this.appStoreFacade.setTitle(this.titulo);
     this.paginator = this.tbFooter.paginator;
+
+    console.log('sidenav1', this.sidenav1);
+    console.log('sidenav2', this.sidenav2);
 
     if (this.params.page) {
       this.paginator.pageIndex = Number(this.params.offset);
@@ -198,7 +196,7 @@ export class IndexDlgApiComponent extends BaseComponent implements OnInit {
       relativeTo: this.activeRoute,
       queryParams: this.params,
       queryParamsHandling: 'merge',
-      skipLocationChange: false,
+      skipLocationChange: false
     });
   }
 }

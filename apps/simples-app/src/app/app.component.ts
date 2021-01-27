@@ -1,25 +1,11 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  HostBinding,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import {
-  NavigationFacade,
-  SettingsFacade,
-  StoreFacade,
-} from '@simples/app-store';
+import { NavigationFacade, SettingsFacade, StoreFacade } from '@simples/app-store';
+import { MultilevelMenuService } from 'ng-material-multilevel-menu';
 import { Observable } from 'rxjs';
 
-import {
-  onMainContentChange,
-  sideNavAnimation,
-  sideNavContainerAnimation,
-} from './app.animations';
 import { navigation } from './menu';
 
 // import * as fromIssue from './store/issue/issue.selectors';
@@ -27,11 +13,11 @@ import { navigation } from './menu';
 @Component({
   selector: 'simples-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
   appitems = navigation;
-  title = 'simples-app'
+  title = 'simples-app';
 
   @ViewChild('sidenav') sidenav: MatSidenav;
   navigationLoading$: Observable<boolean>;
@@ -44,7 +30,10 @@ export class AppComponent implements OnInit, OnDestroy {
     private storeFacade: StoreFacade,
     private navFacade: NavigationFacade,
     private settingsFacade: SettingsFacade,
-    private cdRef: ChangeDetectorRef
+    private cdRef: ChangeDetectorRef,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private multilevelMenuService: MultilevelMenuService
   ) {
     this.navigationLoading$ = this.navFacade.selectLoading$;
   }
@@ -63,7 +52,9 @@ export class AppComponent implements OnInit, OnDestroy {
     this.settingsFacade.changeLeftSidenav(sideNavPayload);
   }
 
-  reset(): void {this.storeFacade.resetCache()}
+  reset(): void {
+    this.storeFacade.resetCache();
+  }
 
   mouseenter() {
     // console.log('mouse entrou');
@@ -82,7 +73,5 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   // tslint:disable-next-line: member-ordering
-  shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some((h) =>
-    h.test(window.location.host)
-  );
+  shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));
 }
