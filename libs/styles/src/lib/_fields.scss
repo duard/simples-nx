@@ -26,18 +26,27 @@
   // width: 90%;
 }
 
+.mat-column-isActive {
+  color: #222;
+  padding-right: 2px;
+  max-width: 36px !important;
+  width: 15px !important;
+}
+
 .mat-column-createdAt {
+  text-align: center;
   color: rgb(138, 138, 138) !important;
   padding-right: 5px;
-  min-width: 115px !important;
-  width: 115px;
+  min-width: 140px !important;
+  width: 140px;
   text-align: left;
 }
 
 .mat-column-updatedAt {
-  color: rgb(118, 118, 118) !important;
+  text-align: center;
+
   padding-right: 5px;
-  min-width: 115px !important;
-  width: 115px;
+  min-width: 140px !important;
+  width: 140px !important;
   text-align: left;
 }
