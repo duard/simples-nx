@@ -43,7 +43,7 @@ export class SidenavComponent implements OnInit {
     highlightOnSelect: true,
 
     collapseOnSelect: true,
-    useDividers: true,
+    useDividers: false,
     rtlLayout: false
   };
 
