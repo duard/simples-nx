@@ -14,7 +14,7 @@ const routes: Routes = [
     path: '',
     component: ProfilesComponent,
     children: [
-      { path: 'index', component: IndexComponent, data: { page: 'Todos Profiles', tela: 'Profiles' } },
+      { path: 'index', component: IndexComponent, data: { page: 'Cadastro de Perfis', tela: 'Perfis' } },
       { path: ':id', component: FormComponent }
     ]
   }

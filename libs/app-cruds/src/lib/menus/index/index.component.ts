@@ -56,8 +56,6 @@ export class IndexComponent extends IndexDlgApiComponent implements OnInit, Afte
     this.dataService.clearCache();
     this.dataService.getWithQuery(this.params);
     this.multilevelMenuService.selectMenuByID('testes');
-    console.log('set params pagination.');
-    this.setPaginationQueryParameters();
   }
 
   onDblClick(registro: Cargo) {

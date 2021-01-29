@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { isDevMode, NgModule } from '@angular/core';
 import { EntityCollectionReducerMethodsFactory, EntityDataModule, PersistenceResultHandler } from '@ngrx/data';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
@@ -22,7 +22,17 @@ const RouterStateMinimal = 1;
   imports: [
     CommonModule,
     HttpClientModule,
-    StoreModule.forRoot(reducers, { metaReducers }),
+    StoreModule.forRoot(reducers, {
+      metaReducers,
+      runtimeChecks: {
+        strictActionImmutability: false,
+        strictActionSerializability: false,
+        strictActionTypeUniqueness: isDevMode(),
+        strictActionWithinNgZone: isDevMode(),
+        strictStateImmutability: isDevMode(),
+        strictStateSerializability: false
+      }
+    }),
     EffectsModule.forRoot([HydrationEffects, RouterEffects, SettingsEffects]),
     StoreRouterConnectingModule.forRoot({ routerState: RouterStateMinimal }),
     EntityDataModule.forRoot(entityConfig),
@@ -31,18 +41,18 @@ const RouterStateMinimal = 1;
       ? []
       : StoreDevtoolsModule.instrument({
           name: '2020 Estoques',
-          maxAge: 26,
-        }),
+          maxAge: 26
+        })
   ],
   providers: [
     {
       provide: PersistenceResultHandler,
-      useClass: AdditionalPersistenceResultHandler,
+      useClass: AdditionalPersistenceResultHandler
     },
     {
       provide: EntityCollectionReducerMethodsFactory,
-      useClass: AdditionalEntityCollectionReducerMethodsFactory,
-    },
-  ],
+      useClass: AdditionalEntityCollectionReducerMethodsFactory
+    }
+  ]
 })
 export class AppStoreModule {}

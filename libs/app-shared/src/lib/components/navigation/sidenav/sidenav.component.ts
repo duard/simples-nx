@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ActivatedRoute, Data, Router } from '@angular/router';
+import { ActivatedRoute, ActivatedRouteSnapshot, Data, NavigationEnd, Router } from '@angular/router';
 import { SettingsFacade } from '@simples/app-store';
+import { selectMenu } from 'libs/app-store/src/lib/settings/settings.selectors';
 import {
   ExpandedLTR,
   ExpandedRTL,
@@ -8,6 +9,8 @@ import {
   MultilevelNodes,
   SlideInOut
 } from 'ng-material-multilevel-menu';
+import { Observable, Subscription } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'simples-sidenav',
@@ -19,8 +22,14 @@ export class SidenavComponent implements OnInit {
   menuWithID: MultilevelNodes[] = null;
 
   @Output() sideNavClosed = new EventEmitter();
+  @Output() menuReady = new EventEmitter();
 
   @Input() menuItens: any;
+
+  subs: Array<Subscription> = [];
+
+  menuRoute: string;
+  menuSelected: any;
 
   config = {
     paddingAtStart: true,
@@ -43,27 +52,62 @@ export class SidenavComponent implements OnInit {
     private activeRoute: ActivatedRoute,
     private multilevelMenuService: MultilevelMenuService,
     private settingsFacade: SettingsFacade
-  ) {}
+  ) {
+    this.router.events
+      .pipe(
+        filter(event => event instanceof NavigationEnd),
+        map(() => this.activeRoute.snapshot),
+        map(route => {
+          while (route.firstChild) {
+            route = route.firstChild;
+          }
+          return route;
+        })
+      )
+      .subscribe((route: ActivatedRouteSnapshot) => {
+        this.menuRoute = route.data.tela;
+        console.log('MENUUUS', 'entries', this.menuWithID);
 
-  ngOnInit(): void {
-    this.activeRoute.data.subscribe(data => {
-      console.log('bongado ====>', data.menu);
-      this.multilevelMenuService.selectMenuByID(data.menu);
-    });
-    this.multilevelMenuService.selectMenuByID('menus');
+        const menuFinded = this.findMenuByLabel(this.menuWithID, this.menuRoute);
+
+        console.log('MENU', this.menuRoute, this.menuSelected);
+        this.multilevelMenuService.selectMenuByID(this.menuSelected.id);
+      });
   }
+
+  findMenuByLabel(o, label) {
+    const first = o.find(x => {
+      if (x.label == label) {
+        return x;
+      }
+    });
+
+    if (first) {
+      this.menuSelected = first;
+      return first;
+    } else {
+      let result, p;
+      for (p in o) {
+        if (o[p].hasOwnProperty('items')) {
+          this.findMenuByLabel(o[p].items, label);
+        }
+      }
+    }
+  }
+
+  ngOnInit(): void {}
 
   onMenuClick() {
     this.sideNavClosed.emit();
   }
 
   setExpandCollapseStatus(type) {
-    this.multilevelMenuService.setMenuExapandCollpaseStatus(type);
+    // this.multilevelMenuService.setMenuExapandCollpaseStatus(type);
   }
 
   selectedItem(menu) {
     console.log('item', menu);
-    this.multilevelMenuService.selectMenuByID(menu.id);
+    // this.multilevelMenuService.selectMenuByID(menu.id);
   }
 
   selectedLabel(menu) {
@@ -71,16 +115,11 @@ export class SidenavComponent implements OnInit {
   }
 
   selectMenuID(MenuID) {
-    this.multilevelMenuService.selectMenuByID(MenuID);
+    // this.multilevelMenuService.selectMenuByID(MenuID);
   }
 
   menuIsReady(menus: MultilevelNodes[]) {
     this.menuWithID = menus;
-    console.log('estou pronto', typeof this.menuWithID);
-
-    let entries = [this.menuWithID];
-
-    // this.settingsFacade.pushMenu(this.menuWithID);
   }
 
   onAbout() {
@@ -88,29 +127,8 @@ export class SidenavComponent implements OnInit {
     this.sideNavClosed.emit(); // Emit event to parent component so it can tell sidenav to close
   }
 
-  walkRecursive(walkable, walkFunc) {
-    if (typeof walkable === 'object') {
-      let v;
-      if (walkable instanceof Array) {
-        for (let i = 0, l = walkable.length; i < l; i++) {
-          v = walkable[i];
-          if (typeof v === 'object') {
-            this.walkRecursive(v, walkFunc);
-          } else {
-            walkFunc(v, i, walkable);
-          }
-        }
-      } else {
-        for (let i in walkable) {
-          v = walkable[i];
-          if (typeof v === 'object') {
-            this.walkRecursive(v, walkFunc);
-          } else {
-            walkFunc(v, i, walkable);
-          }
-        }
-      }
-    }
-    return;
+  ngOnDestroy(): void {
+    console.log('dESTRUIÇÃO SideNav');
+    this.subs.forEach(s => s.unsubscribe());
   }
 }

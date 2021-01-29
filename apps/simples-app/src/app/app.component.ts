@@ -1,11 +1,11 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { NavigationFacade, SettingsFacade, StoreFacade } from '@simples/app-store';
 import { MultilevelMenuService } from 'ng-material-multilevel-menu';
-import { Observable } from 'rxjs';
-
+import { Observable, Subscription } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import { navigation } from './menu';
 
 // import * as fromIssue from './store/issue/issue.selectors';
@@ -18,8 +18,9 @@ import { navigation } from './menu';
 export class AppComponent implements OnInit, OnDestroy {
   appitems = navigation;
   title = 'simples-app';
+  subs: Array<Subscription> = [];
 
-  @ViewChild('sidenav') sidenav: MatSidenav;
+  @ViewChild('sidenav1') sidenav: MatSidenav;
   navigationLoading$: Observable<boolean>;
   leftSideNav$ = this.settingsFacade.selectSidenav$;
 
@@ -32,10 +33,26 @@ export class AppComponent implements OnInit, OnDestroy {
     private settingsFacade: SettingsFacade,
     private cdRef: ChangeDetectorRef,
     private router: Router,
-    private activatedRoute: ActivatedRoute,
+    private activeRoute: ActivatedRoute,
+    private route: ActivatedRoute,
     private multilevelMenuService: MultilevelMenuService
   ) {
     this.navigationLoading$ = this.navFacade.selectLoading$;
+
+    // this.subs[0] = this.router.events
+    // .pipe(
+    //   filter(event => event instanceof NavigationEnd),
+    //   map(() => this.route.snapshot),
+    //   map(route => {
+    //     while (route.firstChild) {
+    //       route = route.firstChild;
+    //     }
+    //     return route;
+    //   })
+    // )
+    // .subscribe((route: ActivatedRouteSnapshot) => {
+    //   console.log(route.data);
+    // });
   }
 
   ngOnInit() {
@@ -44,6 +61,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngAfterViewInit() {
+    // console.log(this.sidenav);
     this.ngDoCheck();
   }
 
@@ -70,6 +88,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     console.log('dESTRUIÇÃO TOTAL');
+    this.subs.forEach(s => s.unsubscribe());
   }
 
   // tslint:disable-next-line: member-ordering

@@ -79,7 +79,7 @@ const reducer = createReducer(
   on(actionPushMenu, (state, { menus }) => {
     console.log('reducer', typeof menus);
     //  menus.map(item => Object.assign({}, item, { selected: false }));
-    //     state.menus = newData;
+    // state.menus = ['menu1', 'menu2'];
 
     return { ...state, menus };
   })

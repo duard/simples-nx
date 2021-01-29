@@ -62,10 +62,10 @@ export class IndexDlgApiComponent extends BaseComponent implements OnInit {
       }
     });
 
-    this.activeRoute.data.subscribe(data => {
-      console.log('====>', data.menu);
-      this.multilevelMenuService.selectMenuByID(data.menu);
-    });
+    // this.activeRoute.data.subscribe(data => {
+    //   // console.log('====>', data.menu);
+    //   this.multilevelMenuService.selectMenuByID(data.menu);
+    // });
 
     if (!this.isDev) {
     }
@@ -99,8 +99,8 @@ export class IndexDlgApiComponent extends BaseComponent implements OnInit {
     // this.appStoreFacade.setTitle(this.titulo);
     this.paginator = this.tbFooter.paginator;
 
-    console.log('sidenav1', this.sidenav1);
-    console.log('sidenav2', this.sidenav2);
+    // console.log('sidenav1', this.sidenav1Component);
+    // console.log('sidenav2', this.sidenav2Component);
 
     if (this.params.page) {
       this.paginator.pageIndex = Number(this.params.offset);
