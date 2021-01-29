@@ -6,7 +6,7 @@ import { NavigationFacade, SettingsFacade, StoreFacade } from '@simples/app-stor
 import { MultilevelMenuService } from 'ng-material-multilevel-menu';
 import { Observable, Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
-import { navigation } from './menu';
+import { navigation, navigation3 } from './menu';
 
 // import * as fromIssue from './store/issue/issue.selectors';
 // import { reset } from './store/meta-reducers';
@@ -17,6 +17,8 @@ import { navigation } from './menu';
 })
 export class AppComponent implements OnInit, OnDestroy {
   appitems = navigation;
+  navItems = navigation3;
+
   title = 'simples-app';
   subs: Array<Subscription> = [];
 

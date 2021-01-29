@@ -9,6 +9,10 @@
     (menuButtonClick)="onChangeLeftSideNav()"
   >
     <simples-sidenav (sideNavClosed)="onChangeLeftSideNav()" [menuItens]="appitems"></simples-sidenav>
+    <!-- 
+    <mat-nav-list>
+      <app-menu-list-item *ngFor="let item of navItems" [item]="item"></app-menu-list-item>
+    </mat-nav-list> -->
   </mat-sidenav>
 
   <mat-sidenav-content fxLayout="column">

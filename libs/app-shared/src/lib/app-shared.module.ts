@@ -2,27 +2,19 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CdkTableModule } from '@angular/cdk/table';
 import { CdkTreeModule } from '@angular/cdk/tree';
 import { CommonModule } from '@angular/common';
-import {
-  ModuleWithProviders,
-  NgModule,
-  Optional,
-  SkipSelf,
-} from '@angular/core';
+import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DialogModule } from '@ngneat/dialog';
 import { ErrorTailorModule } from '@ngneat/error-tailor';
-import {
-  MultilevelMenuService,
-  NgMaterialMultilevelMenuModule,
-} from 'ng-material-multilevel-menu';
+import { MultilevelMenuService, NgMaterialMultilevelMenuModule } from 'ng-material-multilevel-menu';
 import { NgxMaskModule } from 'ngx-mask';
 import { NgxMatErrorsModule } from 'ngx-mat-errors';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import {
   PERFECT_SCROLLBAR_CONFIG,
   PerfectScrollbarConfigInterface,
-  PerfectScrollbarModule,
+  PerfectScrollbarModule
 } from 'ngx-perfect-scrollbar';
 
 import { DataTableComponent } from './components/data-table/data-table.component';
@@ -30,6 +22,7 @@ import { FormInspectorComponent } from './components/form-inspector/form-inspect
 import { LoaderComponent } from './components/loader/loader.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { MediaQueryStatusComponent } from './components/media-query-status/media-query-status.component';
+import { MenuListItemComponent } from './components/menu-list-item/menu-list-item.component';
 import { MenuThemeComponent } from './components/menu-theme/menu-theme.component';
 import { FooterMobileComponent } from './components/navigation/footer-mobile/footer-mobile.component';
 import { HeaderMobileComponent } from './components/navigation/header-mobile/header-mobile.component';
@@ -43,7 +36,7 @@ import { IndexDlgApiComponent } from './heranca/crud-dlg-api/index/index.compone
 import { MaterialModule } from './material.module';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
-  suppressScrollX: true,
+  suppressScrollX: true
 };
 
 @NgModule({
@@ -64,30 +57,30 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
           required: 'Este campo é obrigatório',
           minlength: ({ requiredLength, actualLength }) =>
             `Esperado ${requiredLength} caracteres porém tem ${actualLength}`,
-          invalidAddress: (error) => `Endereço inválido`,
-        },
-      },
+          invalidAddress: error => `Endereço inválido`
+        }
+      }
     }),
 
     DialogModule.forRoot({
       sizes: {
         sm: {
           width: '300px',
-          minHeight: '250px',
+          minHeight: '250px'
         },
         md: {
           width: '60vw',
-          height: '60vh',
+          height: '60vh'
         },
         lg: {
           width: '90vw',
-          height: '90vh',
+          height: '90vh'
         },
         fullScreen: {
           width: '100vw',
-          height: '100vh',
-        },
-      },
+          height: '100vh'
+        }
+      }
       // success: {
       //   component: AppSuccessDialog
       // },
@@ -103,7 +96,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     CdkTreeModule,
     DragDropModule,
 
-    NgxMaskModule.forRoot(),
+    NgxMaskModule.forRoot()
   ],
   declarations: [
     FooterMobileComponent,
@@ -122,9 +115,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 
     LoadingComponent,
 
+    MenuListItemComponent,
+
     ToolbarCrudSimplesComponent,
     ToolbarCrudDlgComponent,
-    ToolbarCrudFooterComponent,
+    ToolbarCrudFooterComponent
   ],
   exports: [
     FormsModule,
@@ -147,32 +142,31 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MenuThemeComponent,
 
     LoadingComponent,
+    MenuListItemComponent,
 
     ToolbarCrudSimplesComponent,
     ToolbarCrudDlgComponent,
-    ToolbarCrudFooterComponent,
+    ToolbarCrudFooterComponent
   ],
 
   providers: [
     MultilevelMenuService,
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
-      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
-    },
-  ],
+      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+    }
+  ]
 })
 export class AppSharedModule {
-  public static forRoot(
-    environment: any
-  ): ModuleWithProviders<AppSharedModule> {
+  public static forRoot(environment: any): ModuleWithProviders<AppSharedModule> {
     return {
       ngModule: AppSharedModule,
       providers: [
         {
           provide: 'env',
-          useValue: environment,
-        },
-      ],
+          useValue: environment
+        }
+      ]
     };
   }
 

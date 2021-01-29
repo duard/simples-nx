@@ -37,7 +37,7 @@ export class SidenavComponent implements OnInit {
     // listBackgroundColor: `rgb(208, 241, 239)`,
     // fontColor: `rgb(8, 54, 71)`,
     // backgroundColor: `rgb(208, 241, 239)`,
-    // selectedListFontColor: `red`,
+    selectedListFontColor: `red`,
 
     interfaceWithRoute: true,
     highlightOnSelect: true,
