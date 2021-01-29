@@ -23,6 +23,13 @@ export const navigation: any[] = [
     icon: 'import_contacts',
     items: [
       {
+        id: 'profiles',
+        label: 'Perfis',
+        type: 'item',
+        link: '/seguranca/profiles',
+        exactMatch: false
+      },
+      {
         id: 'cargos',
         label: 'Cargos',
         type: 'item',
@@ -42,20 +49,6 @@ export const navigation: any[] = [
         // navigationExtras: {
         //   queryParams: { order: 'popular', filter: 'new' }
         // }
-        exactMatch: true
-      },
-      {
-        id: 'profiles',
-        label: 'Perfis',
-        type: 'item',
-        link: '/seguranca/profiles',
-        exactMatch: false
-      },
-      {
-        id: 'orderDetail',
-        label: 'Order Detail',
-        type: 'item',
-        link: '/apps/e-commerce/orders/1',
         exactMatch: true
       }
     ]

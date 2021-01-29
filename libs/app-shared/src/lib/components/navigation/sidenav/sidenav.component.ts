@@ -53,26 +53,24 @@ export class SidenavComponent implements OnInit {
     private multilevelMenuService: MultilevelMenuService,
     private settingsFacade: SettingsFacade
   ) {
-    this.router.events
-      .pipe(
-        filter(event => event instanceof NavigationEnd),
-        map(() => this.activeRoute.snapshot),
-        map(route => {
-          while (route.firstChild) {
-            route = route.firstChild;
-          }
-          return route;
-        })
-      )
-      .subscribe((route: ActivatedRouteSnapshot) => {
-        this.menuRoute = route.data.tela;
-        console.log('MENUUUS', 'entries', this.menuWithID);
-
-        const menuFinded = this.findMenuByLabel(this.menuWithID, this.menuRoute);
-
-        console.log('MENU', this.menuRoute, this.menuSelected);
-        this.multilevelMenuService.selectMenuByID(this.menuSelected.id);
-      });
+    // this.router.events
+    //   .pipe(
+    //     filter(event => event instanceof NavigationEnd),
+    //     map(() => this.activeRoute.snapshot),
+    //     map(route => {
+    //       while (route.firstChild) {
+    //         route = route.firstChild;
+    //       }
+    //       return route;
+    //     })
+    //   )
+    //   .subscribe((route: ActivatedRouteSnapshot) => {
+    //     this.menuRoute = route.data.tela;
+    //     // console.log('MENUUUS', 'entries', this.menuWithID);
+    //     const menuFinded = this.findMenuByLabel(this.menuWithID, this.menuRoute);
+    //     // console.log('MENU', this.menuRoute, this.menuSelected);
+    //     this.multilevelMenuService.selectMenuByID(this.menuSelected.id);
+    //   });
   }
 
   findMenuByLabel(o, label) {
@@ -106,16 +104,18 @@ export class SidenavComponent implements OnInit {
   }
 
   selectedItem(menu) {
-    console.log('item', menu);
+    console.log('selectedItem', menu);
     // this.multilevelMenuService.selectMenuByID(menu.id);
   }
 
   selectedLabel(menu) {
-    console.log('label', menu.id);
+    console.log('selectedLabel', menu);
+    // this.multilevelMenuService.selectMenuByID(menu.id);
   }
 
   selectMenuID(MenuID) {
     // this.multilevelMenuService.selectMenuByID(MenuID);
+    console.log('selectedLabel', MenuID);
   }
 
   menuIsReady(menus: MultilevelNodes[]) {

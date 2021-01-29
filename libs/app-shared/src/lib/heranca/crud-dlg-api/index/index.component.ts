@@ -149,7 +149,7 @@ export class IndexDlgApiComponent extends BaseComponent implements OnInit {
     } else {
       console.log('onPaginateAPI', 'sem paginator');
     }
-    this.setPaginationQueryParameters();
+    // this.setPaginationQueryParameters();
     this.loadingService.hide();
   }
 

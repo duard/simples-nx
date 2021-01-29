@@ -25,19 +25,6 @@ export class IndexComponent extends IndexDlgApiComponent implements OnInit, Afte
 
   displayedColumns: string[] = ['id', 'description', 'createdAt', 'updatedAt', 'isActive'];
 
-  /*
-
-{ 
-"id": 56, 
-"createdAt": "2021-01-19T18:46:06.000Z", 
-"updatedAt": "2021-01-19T18:46:06.000Z", 
-"deletedAt": null, 
-"isDeleted": false, 
-"isActive": true, 
-"description": "goiabada gigantesca" 
-}      
-
-  */
   constructor(private injector: Injector, @Inject('env') public env, private dataService: CargosCollectionService) {
     super(injector, env);
     // localStorage.removeItem(this.localParams);

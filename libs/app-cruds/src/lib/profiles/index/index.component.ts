@@ -1,6 +1,5 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, Inject, Injector, OnInit } from '@angular/core';
 import { IndexDlgApiComponent } from '@simples/app-shared';
-import { Cargo } from '@simples/shared/interfaces';
 import { Observable } from 'rxjs';
 
 import { FormComponent } from '../form/form.component';
@@ -13,13 +12,13 @@ import { ProfilesCollectionService } from '../profiles.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class IndexComponent extends IndexDlgApiComponent implements OnInit, AfterViewInit {
-  titulo = 'Profiles';
+  titulo = 'Perfis';
   selectedId = 0;
-  localParams = 'profiles';
+  localParams = 'perfis';
 
   selectors$ = this.dataService.selectors$;
   loading$: Observable<boolean>;
-  data$: Observable<Cargo[]> = this.dataService.filteredEntities$;
+  data$: Observable<any[]> = this.dataService.filteredEntities$;
 
   displayedColumns: string[] = [
     'id',
@@ -52,7 +51,7 @@ export class IndexComponent extends IndexDlgApiComponent implements OnInit, Afte
     this.dataService.getWithQuery(this.params);
   }
 
-  onDblClick(registro: Cargo) {
+  onDblClick(registro: any) {
     this.operation = 'edit';
     this.selectedId = registro.id;
     this.onCallForm(registro);
@@ -63,7 +62,7 @@ export class IndexComponent extends IndexDlgApiComponent implements OnInit, Afte
     this.onCallForm();
   }
 
-  onCallForm(registro?: Cargo): void {
+  onCallForm(registro?: any): void {
     this.dlgConfig.data = {
       id: this.selectedId,
       payload: registro,
