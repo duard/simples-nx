@@ -6,20 +6,17 @@ import {
   Inject,
   Injector,
   OnDestroy,
-  OnInit,
+  OnInit
 } from '@angular/core';
 
 import { BaseComponent } from '../inheritance.component';
 
 @Component({
-  selector: ' html 1',
-  template: 'Inheritance: See in logs',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'app-parent-inheritance',
+  template: '<p>parent page crud</p>',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CrudDlgApiComponent
-  extends BaseComponent
-  implements OnInit {
-
+export class CrudDlgApiComponent extends BaseComponent implements OnInit {
   constructor(injector: Injector, @Inject('environment') env?: any) {
     super(injector, env);
     if (!this.isDev) {
@@ -35,6 +32,4 @@ export class CrudDlgApiComponent
   onAdd(): void {}
 
   onClickSearch(): void {}
-
-
 }

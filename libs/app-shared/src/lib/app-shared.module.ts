@@ -33,6 +33,7 @@ import { ToolbarCrudSimplesComponent } from './components/toolbar-crud-simples/t
 import { CrudDlgApiComponent } from './heranca/crud-dlg-api/crud-dlg-api.component';
 import { FormDlgApiComponent } from './heranca/crud-dlg-api/form/form.component';
 import { IndexDlgApiComponent } from './heranca/crud-dlg-api/index/index.component';
+import { BaseComponent } from './heranca/inheritance.component';
 import { MaterialModule } from './material.module';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -99,6 +100,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     NgxMaskModule.forRoot()
   ],
   declarations: [
+    MenuThemeComponent,
     FooterMobileComponent,
     HeaderMobileComponent,
     SidenavComponent,
@@ -107,11 +109,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     DataTableComponent,
     FormInspectorComponent,
 
+    BaseComponent,
+
     CrudDlgApiComponent,
     IndexDlgApiComponent,
     FormDlgApiComponent,
-
-    MenuThemeComponent,
 
     LoadingComponent,
 

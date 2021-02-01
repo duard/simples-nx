@@ -22,8 +22,8 @@ import { Subject, Subscription } from 'rxjs';
 import { LoadingService } from '../components/loading/loading.service';
 
 @Component({
-  selector: 'inheritance',
-  template: 'Inheritance: See in logs',
+  selector: 'app-inheritance',
+  template: '<p>inheritance page crud</p>',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BaseComponent

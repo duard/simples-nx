@@ -3,16 +3,15 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 import { DialogService } from '@ngneat/dialog';
-import { SidenavComponent } from '../../../components/navigation/sidenav/sidenav.component';
+// import { SidenavComponent } from '../../../components/navigation/sidenav/sidenav.component';
 
 import { ToolbarCrudFooterComponent } from '../../../components/toolbar-crud-footer/toolbar-crud-footer.component';
 import { ToolbarCrudSimplesComponent } from '../../../components/toolbar-crud-simples/toolbar-crud-simples.component';
 import { BaseComponent } from '../../inheritance.component';
 
 @Component({
-  selector: ' html 2',
-  template: 'Inheritance: See in logs',
-
+  selector: 'app-index-inheritance',
+  template: '<p>index page crud</p>',
   styleUrls: ['./index.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -44,11 +43,6 @@ export class IndexDlgApiComponent extends BaseComponent implements OnInit {
   @ViewChild(MatTable) table: MatTable<any>;
   @ViewChild(ToolbarCrudSimplesComponent) tbCrud: any;
   @ViewChild(ToolbarCrudFooterComponent) tbFooter: any;
-  @ViewChild(SidenavComponent) sidenav1: any;
-  @ViewChild(SidenavComponent) sidenav2: any;
-
-  @ViewChild('sidenav1') sidenav1Component: SidenavComponent;
-  @ViewChild('sidenav2') sidenav2Component: SidenavComponent;
 
   constructor(injector: Injector, @Inject('environment') env?: any) {
     super(injector, env);

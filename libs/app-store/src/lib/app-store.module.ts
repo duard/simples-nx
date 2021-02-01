@@ -25,6 +25,7 @@ const RouterStateMinimal = 1;
     StoreModule.forRoot(reducers, {
       metaReducers,
       runtimeChecks: {
+        // strictActionWithinNgZone: false,
         strictActionImmutability: false,
         strictActionSerializability: false,
         strictActionTypeUniqueness: isDevMode(),
@@ -55,4 +56,8 @@ const RouterStateMinimal = 1;
     }
   ]
 })
-export class AppStoreModule {}
+export class AppStoreModule {
+  constructor() {
+    console.log('isDevMode()', isDevMode());
+  }
+}

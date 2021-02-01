@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import * as thisActions from './settings.actions';
@@ -11,14 +11,18 @@ export class SettingsFacade {
   selectSidenav$ = this.store$.select(fromSelector.selectSettingsSideNav);
   selectMenu$ = this.store$.select(fromSelector.selectMenu);
 
-  constructor(private store$: Store) {}
+  constructor(private store$: Store, private ngZone: NgZone) {}
 
   changeLeftSidenav(payload: boolean) {
-    this.store$.dispatch(thisActions.actionSettingsChangeSideNav({ sideNav: payload }));
+    this.ngZone.run(() => {
+      this.store$.dispatch(thisActions.actionSettingsChangeSideNav({ sideNav: payload }));
+    });
   }
 
   pushMenu(payload: any) {
-    console.log('facade', payload);
-    this.store$.dispatch(thisActions.actionPushMenu({ menus: payload }));
+    this.ngZone.run(() => {
+      console.log('facade', payload);
+      this.store$.dispatch(thisActions.actionPushMenu({ menus: payload }));
+    });
   }
 }

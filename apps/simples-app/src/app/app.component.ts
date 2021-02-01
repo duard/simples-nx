@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@ang
 import { MatSidenav } from '@angular/material/sidenav';
 import { ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { NavigationFacade, SettingsFacade, StoreFacade } from '@simples/app-store';
+import { NavigationFacade, SettingsFacade } from '@simples/app-store';
 import { MultilevelMenuService } from 'ng-material-multilevel-menu';
 import { Observable, Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
@@ -30,7 +30,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store,
-    private storeFacade: StoreFacade,
+    // private storeFacade: StoreFacade,
     private navFacade: NavigationFacade,
     private settingsFacade: SettingsFacade,
     private cdRef: ChangeDetectorRef,
@@ -58,7 +58,6 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    console.log('ngOnInit AppComponent');
     // this.storeFacade.resetCache();
   }
 
@@ -69,11 +68,11 @@ export class AppComponent implements OnInit, OnDestroy {
 
   onChangeLeftSideNav() {
     const sideNavPayload = !this.sidenav?.opened;
-    this.settingsFacade.changeLeftSidenav(sideNavPayload);
+    // this.settingsFacade.changeLeftSidenav(sideNavPayload);
   }
 
   reset(): void {
-    this.storeFacade.resetCache();
+    // this.storeFacade.resetCache();
   }
 
   mouseenter() {
@@ -89,7 +88,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    console.log('dESTRUIÇÃO TOTAL');
+    // console.log('dESTRUIÇÃO TOTAL');
     this.subs.forEach(s => s.unsubscribe());
   }
 

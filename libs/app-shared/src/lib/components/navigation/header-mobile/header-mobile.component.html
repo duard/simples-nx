@@ -43,11 +43,11 @@
 
     <!-- <span>Dora</span> -->
     <span class="spacer"></span>
-    <app-menu-theme
+    <!-- <app-menu-theme
       [options]="options$ | async"
       (themeChange)="themeChangeHandler($event)"
     >
-    </app-menu-theme>
+    </app-menu-theme> -->
 
     <button #r="matMenuTrigger" mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon (click)="onMenuClick()" (mouseover)="open(r)">menu</mat-icon>

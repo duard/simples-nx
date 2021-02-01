@@ -4,11 +4,12 @@ import { Location } from '@angular/common';
 
 import { Router } from '@angular/router';
 import { AppCoreModule } from '@simples/app-core';
-import { MaterialModule } from '@simples/app-shared';
+import { AppSharedModule, MaterialModule } from '@simples/app-shared';
 import { AppStoreModule } from '@simples/app-store';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { NgZone } from '@angular/core';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -24,18 +25,21 @@ describe('AppComponent', () => {
         AppCoreModule.forRoot(environment),
         MaterialModule,
         AppRoutingModule,
-        // AppSharedModule.forRoot(environment),
-        AppStoreModule,
+        AppSharedModule.forRoot(environment),
+        AppStoreModule //.forRoot(environment),
       ],
       providers: [
+        // NgZone,
         { provide: APP_BASE_HREF, useValue: '/' },
         { provide: 'environment', useValue: environment },
         { provide: 'env', useValue: environment },
-        { provide: LocationStrategy, useClass: HashLocationStrategy },
-      ],
+        { provide: LocationStrategy, useClass: HashLocationStrategy }
+      ]
     })
       .compileComponents()
       .then(() => {
+        let zone = TestBed.get(NgZone);
+
         fixture = TestBed.createComponent(AppComponent);
         component = fixture.debugElement.componentInstance;
         compiled = fixture.debugElement.nativeElement;

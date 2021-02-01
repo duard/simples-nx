@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { Actions, createEffect, ofType, OnInitEffects } from '@ngrx/effects';
 import { Action, Store } from '@ngrx/store';
 import { distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
@@ -28,20 +28,48 @@ export class HydrationEffects implements OnInitEffects {
   serialize$ = createEffect(
     () =>
       this.action$.pipe(
-        ofType(
-          HydrationActions.hydrateSuccess,
-          HydrationActions.hydrateFailure
-        ),
+        ofType(HydrationActions.hydrateSuccess, HydrationActions.hydrateFailure),
         switchMap(() => this.store),
         distinctUntilChanged(),
-        tap((state) => localStorage.setItem('state', JSON.stringify(state)))
+        tap(state => localStorage.setItem('state', JSON.stringify(state)))
       ),
     { dispatch: false }
   );
 
-  constructor(private action$: Actions, private store: Store<RootState>) {}
+  constructor(private action$: Actions, private store: Store<RootState>, private ngZone: NgZone) {}
 
   ngrxOnInitEffects(): Action {
-    return HydrationActions.hydrate();
+    // return this.ngZone.run(() => HydrationActions.hydrate());
+
+    // let someThing: any;
+
+    this.ngZone.run(() => {
+      console.log('Hydration');
+      HydrationActions.hydrate();
+    });
+    // // return HydrationActions.hydrate();
+
+    // return this.ngZone.run(() => {
+    //   console.log('Hydration');
+    //   someThing = HydrationActions.hydrate();
+
+    //   return someThing;
+
+    // });
+
+    // console.log('Não retornou', someThing);
+
+    // return someThing;
+
+    // this.hydrate();
+
+    return null;
+  }
+
+  hydrate() {
+    return this.ngZone.run(() => {
+      console.log('Hydration');
+      HydrationActions.hydrate();
+    });
   }
 }

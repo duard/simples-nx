@@ -1,11 +1,4 @@
-import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  Component,
-  Inject,
-  Injector,
-  OnInit,
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, Inject, Injector, OnInit } from '@angular/core';
 import { DialogRef, DialogService } from '@ngneat/dialog';
 import { FormBuilder, FormGroup } from '@ngneat/reactive-forms';
 
@@ -13,13 +6,11 @@ import { BaseComponent } from '../../inheritance.component';
 
 // import { State, TeleiroService } from 'projects/lib-core/src/public_api';
 @Component({
-  selector: ' html 3',
-  template: 'Inheritance: See in logs',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'app-form-inheritance',
+  template: '<p>form page crud</p>',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FormDlgApiComponent
-  extends BaseComponent
-  implements OnInit, AfterViewInit {
+export class FormDlgApiComponent extends BaseComponent implements OnInit, AfterViewInit {
   protected dialog: DialogService;
   protected fb: FormBuilder;
 
@@ -29,11 +20,7 @@ export class FormDlgApiComponent
 
   formCRUD: FormGroup;
 
-  constructor(
-    injector: Injector,
-    @Inject('environment') env?: any,
-    public dlgRef?: DialogRef
-  ) {
+  constructor(injector: Injector, @Inject('environment') env?: any, public dlgRef?: DialogRef) {
     super(injector, env);
 
     this.dialog = this.injectorObj.get(DialogService);
@@ -84,8 +71,8 @@ export class FormDlgApiComponent
 
     this.dlgRef.close({
       payload: this.formCRUD.value,
-      operation: this.operation,
-    });   
+      operation: this.operation
+    });
   }
 
   onDelete() {
@@ -100,9 +87,9 @@ export class FormDlgApiComponent
     this.dialog
       .confirm({
         title: 'Excluir registro ?',
-        body: 'Deseja realmente excluir o registro ?',
+        body: 'Deseja realmente excluir o registro ?'
       })
-      .afterClosed$.subscribe((confirmed) => {
+      .afterClosed$.subscribe(confirmed => {
         console.log('Usuário excluiu o registro', confirmed);
       });
   }
