@@ -6,10 +6,10 @@ import { catchError, take } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class PushNotificationService {
-  public baseUrl = environment.API_BASE_URL;
+  public baseUrl = environment.API_SIMPLES_URL;
   private readonly entityPath = 'subscription';
 
   constructor(private readonly swPush: SwPush, private httpClient: HttpClient) {}
@@ -26,7 +26,7 @@ export class PushNotificationService {
     const subscription = await this.swPush.requestSubscription({ serverPublicKey: environment.webPush.publicKey });
     const {
       endpoint,
-      keys: { p256dh, auth },
+      keys: { p256dh, auth }
     } = subscription.toJSON();
     console.log('push subscription created', { endpoint, auth, p256dh });
     await this.httpClient

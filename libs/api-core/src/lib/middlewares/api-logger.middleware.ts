@@ -1,9 +1,4 @@
-import {
-  Inject,
-  Injectable,
-  LoggerService,
-  NestMiddleware,
-} from '@nestjs/common';
+import { Inject, Injectable, LoggerService, NestMiddleware } from '@nestjs/common';
 import * as chalk from 'chalk';
 import { NextFunction, Request, Response } from 'express';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
@@ -14,9 +9,9 @@ export class ApiLoggerMiddleware implements NestMiddleware {
   // private logger = new Logger('HTTP');
   private os = require('os');
 
-  constructor(
-    @Inject(WINSTON_MODULE_NEST_PROVIDER) private readonly logger: LoggerService
-  ) {}
+  constructor(@Inject(WINSTON_MODULE_NEST_PROVIDER) private readonly logger: LoggerService) {
+    console.log('Interceptor Middleware Log');
+  }
 
   use(request: Request, response: Response, next: NextFunction): void {
     // const { ip, method, path: url } = request;
@@ -43,25 +38,13 @@ export class ApiLoggerMiddleware implements NestMiddleware {
       statusColor = '#FFEEEE';
     }
 
-    const statusIcon =
-      status >= 500
-        ? '😠 :'
-        : status >= 400
-        ? '😫'
-        : status >= 300
-        ? '🙂'
-        : '😁';
+    const statusIcon = status >= 500 ? '😠 :' : status >= 400 ? '😫' : status >= 300 ? '🙂' : '😁';
 
-    const token =
-      request.body.token ||
-      request.query.token ||
-      request.headers['authorization'];
+    const token = request.body.token || request.query.token || request.headers['authorization'];
 
     response.on('close', () => {
       if (!token) {
-        console.log(
-          chalk.yellow.bgHex('#FF0000')(`TOKEN NÃO ENVIADO NO HEADER`)
-        );
+        console.log(chalk.yellow.bgHex('#FF0000')(`TOKEN NÃO ENVIADO NO HEADER`));
       }
 
       this.logger.log(
@@ -71,7 +54,6 @@ export class ApiLoggerMiddleware implements NestMiddleware {
         console.log(
           '\n',
           chalk.hex('#000000').bgHex('#FFFFFF')('=>'),
-
 
           chalk.hex('#708090')(userAgent),
           '\n',
@@ -85,7 +67,7 @@ export class ApiLoggerMiddleware implements NestMiddleware {
           '\n',
           chalk.hex('#000000').bgHex('#FFFFFF')('=>'),
           // chalk.hex('#FF69B4').bold(usuarioLogado),
-          chalk.yellow(`[${hostname}] ${ip} ` ),
+          chalk.yellow(`[${hostname}] ${ip} `),
           chalk.hex('#fffa65').bold('from ' + referer),
           '\n',
           chalk.hex('#000000').bgHex('#FFFFFF')('=>'),

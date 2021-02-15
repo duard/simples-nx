@@ -1,4 +1,5 @@
 import { BaseMysqlEntity } from '@simples/api-shared';
+import { Usuario } from '@simples/shared/interfaces';
 import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 
 import { PessoasEntity } from '../pessoas/pessoas.entity';
@@ -14,8 +15,8 @@ export class UsuariosEntity extends BaseMysqlEntity<Usuario> {
   // @OneToOne(() => PessoasEntity, (pessoa) => pessoa.id) // specify inverse side as a second parameter
   // pessoa: PessoasEntity;
 
-  @ManyToOne(() => PessoasEntity, (pessoa) => pessoa.id, {
-    onDelete: 'CASCADE',
+  @ManyToOne(() => PessoasEntity, pessoa => pessoa.id, {
+    onDelete: 'CASCADE'
   })
   @JoinColumn({ name: 'pessoa_id' })
   pessoa: PessoasEntity;
@@ -25,7 +26,7 @@ export class UsuariosEntity extends BaseMysqlEntity<Usuario> {
     name: 'password',
     length: 150,
     nullable: false,
-    select: false,
+    select: false
   })
   password: string;
 
@@ -33,7 +34,7 @@ export class UsuariosEntity extends BaseMysqlEntity<Usuario> {
     type: 'varchar',
     name: 'token_notify',
     nullable: true,
-    length: 255,
+    length: 255
   })
   token: string;
 

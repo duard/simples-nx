@@ -21,7 +21,7 @@ import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
     // HeaderMobileComponent,
     // FooterMobileComponent,
     // SidenavComponent,
@@ -34,13 +34,13 @@ import { AppComponent } from './app.component';
     AppRoutingModule,
     MaterialModule,
     AppSharedModule.forRoot(environment),
-    AppStoreModule,
+    AppStoreModule
   ],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },
     { provide: 'environment', useValue: environment },
-    { provide: LocationStrategy, useClass: HashLocationStrategy },
+    { provide: LocationStrategy, useClass: HashLocationStrategy }
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

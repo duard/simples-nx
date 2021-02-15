@@ -1,10 +1,12 @@
 import { Module } from '@nestjs/common';
 
+import { HttpModule } from './http.module';
+
 @Module({
-  imports: [],
+  imports: [HttpModule],
   controllers: [],
   providers: [],
 
-  exports: [],
+  exports: []
 })
 export class ApiCoreModule {}

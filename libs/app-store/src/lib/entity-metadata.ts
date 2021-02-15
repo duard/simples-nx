@@ -57,14 +57,14 @@ export const entityConfig: EntityDataModuleConfig = {
 
 export const defaultDataServiceConfig: DefaultDataServiceConfig = {
   entityHttpResourceUrls: {
-    // Issue: {
-    //   collectionResourceUrl: '/api/issues/',
-    //   entityResourceUrl: '/api/issues/',
-    // },
-    // Cargos: {
-    //   collectionResourceUrl: '/api/cargos/',
-    //   entityResourceUrl: '/api/cargos/',
-    // },
+    Issue: {
+      collectionResourceUrl: '/api/issues/',
+      entityResourceUrl: '/api/issues/'
+    },
+    Cargos: {
+      collectionResourceUrl: '/api/cargos/',
+      entityResourceUrl: '/api/cargos/'
+    }
   }
 };
 

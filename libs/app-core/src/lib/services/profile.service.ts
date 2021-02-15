@@ -10,7 +10,7 @@ import { EMPTY, throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class ProfileService {
-  private baseUrl = environment.API_BASE_URL;
+  private baseUrl = environment.API_SIMPLES_URL;
   private readonly entityPath = 'user/profile';
 
   constructor(private httpClient: HttpClient) {}
@@ -51,9 +51,7 @@ export class ProfileService {
   // }
 
   delete(id: number | string) {
-    return this.httpClient
-      .delete(`${this.baseUrl}/${this.entityPath}/${id}`)
-      .pipe(catchError(this.handleError));
+    return this.httpClient.delete(`${this.baseUrl}/${this.entityPath}/${id}`).pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse) {
