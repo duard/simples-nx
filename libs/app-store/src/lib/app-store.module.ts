@@ -34,7 +34,7 @@ const RouterStateMinimal = 1;
         strictStateSerializability: false
       }
     }),
-    EffectsModule.forRoot([HydrationEffects, RouterEffects, SettingsEffects]),
+    EffectsModule.forRoot([RouterEffects, SettingsEffects]),
     StoreRouterConnectingModule.forRoot({ routerState: RouterStateMinimal }),
     EntityDataModule.forRoot(entityConfig),
 

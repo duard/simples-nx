@@ -158,7 +158,6 @@
               "apps/simples-tests/src/styles.scss",
               "node_modules/@taiga-ui/core/styles/taiga-ui-global.less",
               "node_modules/@taiga-ui/core/styles/taiga-ui-theme.less",
-
               "node_modules/@taiga-ui/core/styles/theme/variables.less",
               "node_modules/@taiga-ui/core/styles/theme/wrapper.less"
             ],
@@ -325,7 +324,7 @@
       "sourceRoot": "libs/styles/src",
       "prefix": "simples",
       "targets": {},
-      "schematics": {}
+      "generators": {}
     },
     "api-core": {
       "root": "libs/api-core",
