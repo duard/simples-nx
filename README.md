@@ -11,7 +11,7 @@ acesse http://localhost:5000
 
 [Exemplo de como fica o código de um CRUD básico](https://github.com/duard/simples-nx/blob/master/libs/app-cruds/src/lib/menus/index/index.component.ts) ![Screenshot CRUD Básico](screenshot-crud-cargos.jpeg)
 
-Atualizar o projeto inteiro, sempre mantenha ele atualizado, não seja um goiaba que deixa as coisas em 1998.
+Atualizar o projeto inteiro, sempre mantenha ele atualizado.
 
 ```shell
 npm uninstall -g angular-cli;
